@@ -62,10 +62,22 @@ let currBrushCol_1; //G in RGB, S in HSB etc.
 let currBrushCol_2; //B in RGB, B in HSB etc.
 let currBrushCol_alpha; // alpha value
 
+let lastBrushDownPosX, lastBrushDownPosY;
+
 let brushIndex = 0; //type of brush selected (default = 0)
+let brushScale = 1; //size of brush shape (default = 1)
 
 //data (arrays) of each drawing tool element
+//--brush 0 RAINBOW CIRCLE BRUSH
 let rainbow_sfx;
+//--brush 1 RAINBOW STAR BRUSH
+let aangle = 0;
+let bangle = 1;
+let cangle = 2;
+let increment_a;
+let increment_b;
+
+
 
 //get pixelDensity
 let density;
@@ -149,6 +161,7 @@ function preload(){
 }
 
 function setup() {
+  this.focus();
   canvas = createCanvas(windowWidth, windowHeight);
   density = pixelDensity();
   canvas.position(0, 0);
@@ -225,8 +238,8 @@ function setup() {
 
   console.log(saveStateIndex);
 
-
-
+  increment_a = TWO_PI /85.0;
+  increment_b = TWO_PI /100.0;
   resetBrush(brushIndex);
 
   okToShowUI=true;
@@ -284,6 +297,11 @@ function draw() {
       image(pg,0,0);
       blendMode(BLEND);
     }
+  }
+  if (brushIndex == 1){//star brush
+    aangle = aangle-increment_a;
+    bangle = bangle + increment_b;
+    cangle = cangle-increment_a;
   }
 
   if (okToShowUI){
@@ -401,6 +419,14 @@ function mousePressed(){
       }
     }
     if (okToDraw){
+      switch (brushIndex){
+        case 0:
+          break;
+        case 1:
+          drawStarBrush();
+      }
+      lastBrushDownPosX = mouseX;
+      lastBrushDownPosY = mouseY;
       playBrushSfx(brushIndex);
       //remove any later save states ie. clear redo history
       saveState.splice(saveStateIndex+1,max_saveStateIndex-saveStateIndex-1);
@@ -644,8 +670,6 @@ function useBrush(thisBrush){
     case 0:
       //rainbow brush
       pg.colorMode(HSB);
-
-
       if (currBrushCol_0<360){
         currBrushCol_0++;
       } else {
@@ -659,12 +683,121 @@ function useBrush(thisBrush){
         pg.line(1, pmouseY,1, mouseY);
       }
       break;
+    case 1:
+      //stamp brush
+      let travelDist = dist(lastBrushDownPosX, lastBrushDownPosY, mouseX, mouseY);
+      if (travelDist>7*brushScale){
+        drawStarBrush();
+      }
+      break;
   }
+}
+
+function drawStarBrush(){
+  if (mouseX>width/2){
+    pg.colorMode(HSB);
+    if (currBrushCol_0<360){
+      currBrushCol_0++;
+    } else {
+      currBrushCol_0=0;
+    }
+
+    if (Math.random()*2>1.5){
+      pg.noStroke();
+      pg.fill(currBrushCol_0, currBrushCol_1, currBrushCol_2);
+    } else {
+      pg.noFill();
+      pg.strokeWeight(Math.random()*2);
+      pg.stroke(currBrushCol_0, currBrushCol_1, currBrushCol_2);
+    }
+
+    pg.push();
+      pg.translate(mouseX-width/2+sq(sin(bangle*bangle))+sin(aangle)*20*brushScale,mouseY+sq(cos(aangle*aangle))+cos(bangle)*20*brushScale);
+      pg.rotate(Math.random()*TWO_PI);
+      star(0,0,Math.floor(Math.random()*6)*brushScale,Math.floor(Math.random()*(10-8+1)+8)*brushScale,Math.floor(Math.random()*(6-4+1))+4);
+    pg.pop();
+    //circle(mouseX+sq(sin(bangle*bangle))+sin(aangle)*10,mouseY+sq(cos(aangle*aangle))+cos(bangle)*10,5);
+
+    if (currBrushCol_0<240){
+      if (Math.random()*2>1.5){
+        pg.noStroke();
+        pg.fill(currBrushCol_0+120, currBrushCol_1, currBrushCol_2);
+      } else {
+        pg.noFill();
+        pg.strokeWeight(Math.random()*2);
+        pg.stroke(currBrushCol_0+120, currBrushCol_1, currBrushCol_2);
+      }
+    } else {
+      if (Math.random()*2>1.5){
+        pg.noStroke();
+        pg.fill(currBrushCol_0-240, currBrushCol_1, currBrushCol_2);
+      } else {
+        pg.noFill();
+        pg.strokeWeight(Math.random()*2);
+        pg.stroke(currBrushCol_0-240, currBrushCol_1, currBrushCol_2);
+      }
+    }
+    pg.push();
+      pg.translate(mouseX-width/2+sq(cos(bangle*bangle))+cos(cangle)*20*brushScale,mouseY+sq(sin(cangle*cangle))-sin(bangle)*20*brushScale);
+      pg.rotate(Math.random()*TWO_PI);
+      star(0,0,Math.floor(Math.random()*6)*brushScale,Math.floor(Math.random()*(10-8+1)+8)*brushScale,Math.floor(Math.random()*(6-4+1))+4);
+    pg.pop();
+
+    if (currBrushCol_0<120){
+      if (Math.random()*2>1){
+        pg.noStroke();
+        pg.fill(currBrushCol_0+240, currBrushCol_1, currBrushCol_2);
+      } else {
+        pg.noFill();
+        pg.strokeWeight(Math.random()*3);
+        pg.stroke(currBrushCol_0+240, currBrushCol_1, currBrushCol_2);
+      }
+    } else {
+      if (Math.random()*2>1){
+        pg.noStroke();
+        pg.fill(currBrushCol_0-120, currBrushCol_1, currBrushCol_2);
+      } else {
+        pg.noFill();
+        pg.strokeWeight(Math.random()*3);
+        pg.stroke(currBrushCol_0-120, currBrushCol_1, currBrushCol_2);
+      }
+    }
+
+    pg.push();
+      pg.translate(mouseX-width/2+sq(cos(cangle*cangle))-cos(aangle)*20*brushScale,mouseY+sq(sin(aangle*aangle))+sin(cangle)*20*brushScale);
+      pg.rotate(Math.random()*TWO_PI);
+      star(0,0,Math.floor(Math.random()*6)*brushScale,Math.floor(Math.random()*(10-8+1)+8)*brushScale,Math.floor(Math.random()*(6-4+1))+4);
+    pg.pop();
+
+    lastBrushDownPosX = mouseX;
+    lastBrushDownPosY = mouseY;
+  }
+}
+//center pos X, center pos Y, inner rad, outer rad, no. of points
+function star(x, y, radius1, radius2, npoints) {
+  let starAngle = TWO_PI / npoints;
+  let halfAngle = starAngle / 2.0;
+  pg.beginShape();
+  for (let a = 0; a < TWO_PI; a += starAngle) {
+    let sx = x + cos(a) * radius2;
+    let sy = y + sin(a) * radius2;
+    pg.vertex(sx, sy);
+    sx = x + cos(a + halfAngle) * radius1;
+    sy = y + sin(a + halfAngle) * radius1;
+    pg.vertex(sx, sy);
+  }
+  pg.endShape(CLOSE);
 }
 
 function resetBrush(thisBrush){
   switch (thisBrush){
     case 0:
+      currBrushCol_0=0; //R in RGB, H in HSB etc.
+      currBrushCol_1=100; //G in RGB, S in HSB etc.
+      currBrushCol_2=100; //B in RGB, B in HSB etc.
+      currBrushCol_alpha=1; // alpha value
+      break;
+    case 1:
       currBrushCol_0=0; //R in RGB, H in HSB etc.
       currBrushCol_1=100; //G in RGB, S in HSB etc.
       currBrushCol_2=100; //B in RGB, B in HSB etc.
@@ -677,6 +810,9 @@ function playBrushSfx(thisBrush){
   let thisSfx;
   switch (thisBrush){
     case 0:
+      thisSfx = rainbow_sfx;
+      break;
+    case 1:
       thisSfx = rainbow_sfx;
       break;
   }
@@ -695,6 +831,9 @@ function pauseBrushSfx(thisBrush){
   let thisSfx;
   switch (thisBrush){
     case 0:
+      thisSfx = rainbow_sfx;
+      break;
+    case 1:
       thisSfx = rainbow_sfx;
       break;
   }
