@@ -160,8 +160,11 @@ function preload(){
   rainbow_sfx = loadSound('assets/audio/guitarharmonics.mp3');
 }
 
-function setup() {
+window.onload = function() {
   this.focus();
+}
+
+function setup() {
   canvas = createCanvas(windowWidth, windowHeight);
   density = pixelDensity();
   canvas.position(0, 0);
