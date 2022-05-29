@@ -1,5 +1,9 @@
 p5.disableFriendlyErrors = true; // disables FES
 
+//fonts
+let font_msyibaiti;
+let font_OCRAEXT;
+
 //save state variables
 let saveStateIndex = 0;
 let max_saveStateIndex = 10;
@@ -32,9 +36,25 @@ let undoredo_sfx=[];
 let clear_icon=[];
 let newbase_icon=[];
 let newbase_sfx;
+let backtomain_icon=[];
+let backtomain_sfx;
+
+//data (arrays) of each alertbox element
+let warning_icon;
+let oneway_icon;
+let ok_dog_icon=[];
+let not_ok_dog_icon=[];
+let ok_dog_sfx=[];
+let not_ok_dog_sfx=[];
 
 //graphic to draw on
 let pg;
+
+//alert box: graphic above canvas + UI
+let ag;
+let alertIsActive;
+//selected button function+arg while in alert box
+let currFunction;
 
 //drawing tool variables
 let currBrushCol_0; //R in RGB, H in HSB etc.
@@ -58,12 +78,16 @@ let loopedOnce, //check if UI loop looped once
     clickedUI;  //check if mousePressedOnUI
 
 function preload(){
-  
+
+  //load font
+  font_msyibaiti=loadFont('assets/fonts/msyi.ttf');
+  font_ocraext = loadFont('assets/fonts/OCRAEXT.TTF');
+
   //load base template
   for (let i = 1; i <= 3; i++){
     base_template[i-1] = loadImage('assets/images/base_templates/base_'+i+'.png');
   }
-  
+
   //load data (arrays) for UI elements
   for (let i = 0; i <= 3; i++){
     save_icon[i] = loadImage('assets/images/UI/save_'+i+'.png');
@@ -74,6 +98,7 @@ function preload(){
   undo_icon[0] = loadImage('assets/images/UI/egg.png');
   redo_icon[0] = loadImage('assets/images/UI/egg.png');
   newbase_icon[0] = loadImage('assets/images/UI/new_base0000.png');
+  backtomain_icon[0] = loadImage('assets/images/UI/back to main idle v2.png');
   for (let i = 0; i<=2; i++){
     undoredo_sfx[i] = loadSound('assets/audio/tinybell-'+i+'.mp3');
   }
@@ -91,14 +116,34 @@ function preload(){
     newbase_icon[i] = loadImage('assets/images/UI/new_base00'+nf(i,2)+'.png');
   }
   newbase_sfx = loadSound('assets/audio/sparkle_snap.mp3');
-  
+  for (let i = 1; i<=36; i++){
+    backtomain_icon[i] = loadImage('assets/images/UI/back to main v2/'+nf((2*i)-1,4)+'.png');
+  }
+  backtomain_sfx = loadSound('assets/audio/tv-static.mp3');
+
+  //load alert box images + sounds
+  warning_icon = loadImage('assets/images/UI/alert.png');
+  oneway_icon = loadImage('assets/images/UI/oneway.png');
+  ok_dog_icon[0] = loadImage('assets/images/UI/ok-dog-idle.png');
+  not_ok_dog_icon[0] = loadImage('assets/images/UI/not-ok-dog-idle.png');
+
+  for (let i=1; i<=3; i++){
+    ok_dog_sfx[i-1] = loadSound('assets/audio/okdog-'+nf(i,2)+'.mp3');
+    not_ok_dog_sfx[i-1] = loadSound('assets/audio/notokdog-'+nf(i,2)+'.mp3');
+  }
+
+  for (let i=1; i<=6; i++){
+    ok_dog_icon[i] = loadImage('assets/images/UI/ok-dog-anim'+nf(i,4)+'.png');
+    not_ok_dog_icon[i] = loadImage('assets/images/UI/not-ok-dog-anim'+nf(i,4)+'.png');
+  }
+
   //load projection_base images
   for (let i = 1; i<=12; i++){
     his01_img[i-1] = loadImage('assets/images/projection_base/projection_base1_00'+nf(i,2)+'.jpg');
     his02_img[i-1] = loadImage('assets/images/projection_base/projection_base2_00'+nf(i,2)+'.jpg');
     ourskyy01_img[i-1] = loadImage('assets/images/projection_base/projection_base3_00'+nf(i,2)+'.jpg');
   }
-  
+
   //load data (arrays) for drawing tool elements
   rainbow_sfx = loadSound('assets/audio/guitarharmonics.mp3');
 }
@@ -114,55 +159,82 @@ function setup() {
   rectMode(CENTER);
   rect(width/4,height/2,width/2,height);
   frameRate(60);
-  
+
   //resize all base templates
   for (let i = 1; i <= 3; i++){
     base_template[i-1].resize(width/2,0);
   }
-  
+
   for (let i = 1; i <= 12; i++){
     his01_img[i-1].resize(width/2,0);
     his02_img[i-1].resize(width/2,0);
     ourskyy01_img[i-1].resize(width/2,0);
   }
-  
+
+  //resize alert box icons
+  //oneway_icon.resize(0,height/6);
+  warning_icon.resize(0,height/35);
+
+  for (let i = 0; i <= 6; i++){
+    ok_dog_icon[i].resize(125,0);
+    not_ok_dog_icon[i].resize(125,0);
+  }
+
+  //UIobj constructor(x, y, img, func, arg, sound, loopSfx, jitterOnHover, timeInterval)
+  ui[0]= new UIobj(width/2+80,height-80,save_icon,saveScreenshot,null,save_sfx,false,true,125);
+  ui[1]= new UIobj(width/2+180,height-80,undo_icon,undoToPreviousState,null,undoredo_sfx,false,false,90);
+  ui[2]= new UIobj(width/2+260,height-80,redo_icon,redoToNextState,null,undoredo_sfx,false,false,90);
+  ui[3]= new UIobj(width/2+340,height-80,clear_icon,openAlert,clearCanvas,undoredo_sfx,false,false,90);
+  ui[4]= new UIobj(width-80, height-80,newbase_icon,openAlert,changeBase,newbase_sfx,false,false,65);
+  ui[5]= new UIobj(width/2+85,80,backtomain_icon,openAlert,backtomain,backtomain_sfx,true,false,65);
+  //alertUIs - MUST ALWAYS BE THE LAST 2 OBJECTS IN THE "ui" ARRAY!!
+  ui[6]=new UIobj(width/4-65,height*0.7-70,not_ok_dog_icon,closeAlert,null,not_ok_dog_sfx,false,true,83);
+  ui[7]=new UIobj(width/4+65,height*0.7-70,ok_dog_icon,runButtonFunction,null,ok_dog_sfx,false,true,83);
+
   //setup random base template
   currBase = int(Math.random()*3);
   setupBase(currBase);
-  
+
   //setup drawing graphic
   pg = createGraphics(width/2, height);
-  
+
+  //setup alert graphic
+  alertIsActive=false;
+  ag = createGraphics(width/2, height);
+  ag.rectMode(CENTER);
+  ag.textAlign(LEFT, TOP);
+  ag.stroke(0);
+  ag.strokeWeight(3);
+  ag.fill(255);
+  ag.drawingContext.shadowBlur=20;
+  ag.drawingContext.shadowColor = 'white';
+  ag.rect(ag.width/2,height/2,ag.width/2,height/3);
+  ag.drawingContext.shadowBlur=0;
+  ag.drawingContext.shadowColor = color(0,0);
+
   //default drawing tool settings
   currBrushCol_0=0; //R in RGB, H in HSB etc.
   currBrushCol_1=0; //G in RGB, S in HSB etc.
   currBrushCol_2=0; //B in RGB, B in HSB etc.
   currBrushCol_alpha=1; // alpha value
-  
+
   // save saveState at beginning for blank canvas
   newpg[saveStateIndex] = createImage(width*density, height*density);
   newpg[saveStateIndex].copy(pg,0,0,width/2,height,0,0,width*density,height*density);
   saveState.push(newpg[saveStateIndex]);
-  
-  console.log(saveStateIndex);
-  
-  //UIobj constructor(x, y, img, func, arg, sound, jitterOnHover, timeInterval)
-  ui[0]= new UIobj(width/2+60,height-60,save_icon,saveScreenshot,null,save_sfx,true,125);
-  ui[1]= new UIobj(width/2+160,height-60,undo_icon,undoToPreviousState,null,undoredo_sfx,false,90);
-  ui[2]= new UIobj(width/2+240,height-60,redo_icon,redoToNextState,null,undoredo_sfx,false,90);
-  ui[3]= new UIobj(width/2+320,height-60,clear_icon,clearCanvas,null,undoredo_sfx,false,90);
-  ui[4]= new UIobj(width-60, height-60,newbase_icon,changeBase,null,newbase_sfx,false,65);
-  
 
-  
+  console.log(saveStateIndex);
+
+
+
   resetBrush(brushIndex);
-  
+
   okToShowUI=true;
   isDrawing = false;
 }
 
 function draw() {
-  
+
   //frame animation for projection base
   if (currPBaseFrame < 11){
     if ((millis()-lastPBaseTime)>166){
@@ -174,7 +246,7 @@ function draw() {
       rect(width/4,height/2,width/2,height);
       imageMode(CENTER);
       blendMode(LIGHTEST);
-      
+
       switch (currBase){
         case 0:
           image(his01_img[currPBaseFrame],width/4,height/2);
@@ -187,7 +259,7 @@ function draw() {
           break;
       }
 
-      
+
       blendMode(BLEND);
     }
   } else {
@@ -196,7 +268,7 @@ function draw() {
       lastPBaseTime=millis();
     }
   }
-  
+
   if (mouseIsPressed) {
     if (okToDraw){
       useBrush(brushIndex);
@@ -206,87 +278,147 @@ function draw() {
       if (!isDrawing){
         isDrawing = true;
       }
-      
-      //render projection 
+
+      //render projection
       blendMode(DIFFERENCE);
       image(pg,0,0);
       blendMode(BLEND);
-    } 
+    }
   }
-  
+
   if (okToShowUI){
     if (!isDrawing){
       let isHover=[];
-    
+
       for (let i = 0; i < ui.length; i++){
-        isHover[i] = ui[i].checkHover(mouseX,mouseY);
-        if (isHover[i]){
-          if (loopedOnce){
-            loopedOnce = false;
-          }
-          setupBase(currBase);
-          imageMode(CORNER);
-          image(pg,width/2,0);
-          break;
-        } else {
-          if (!loopedOnce){
+        if (i<ui.length-2){
+
+          isHover[i] = ui[i].checkHover(mouseX,mouseY);
+        } else{
+
+          isHover[i] = ui[i].checkHover(mouseX-width/2,mouseY);
+        }
+        if (i<ui.length-2&&!alertIsActive){
+          if (isHover[i]){
+            if (loopedOnce){
+              loopedOnce = false;
+            }
             setupBase(currBase);
             imageMode(CORNER);
             image(pg,width/2,0);
-            loopedOnce=true;
+            break;
+          } else {
+            if (!loopedOnce){
+              setupBase(currBase);
+              imageMode(CORNER);
+              image(pg,width/2,0);
+              loopedOnce=true;
+            }
+          }
+        } else if (i>=ui.length-2&&alertIsActive){
+          if (isHover[i]){
+            if (loopedOnce){
+              loopedOnce = false;
+            }
+            setupAlertBox();
+            imageMode(CORNER);
+            image(ag,width/2,0);
+            console.log('currently hovering over: '+isHover[i]);
+            break;
+          } else {
+            if (!loopedOnce){
+              setupAlertBox();
+              imageMode(CORNER);
+              image(ag,width/2,0);
+              loopedOnce=true;
+            }
           }
         }
       }
     }
-    
-    for (let i = 0; i < ui.length; i++){
-      if (!isDrawing){
-        ui[i].move();
+
+    if (!alertIsActive){
+      for (let i = 0; i < ui.length-2; i++){
+        if (!isDrawing){
+          ui[i].move(mouseX,mouseY);
+        }
+        ui[i].show();
       }
-      ui[i].show();
     }
   }
+
+  // if (alertIsActive){
+  //   imageMode(CORNER);
+  //   image(ag, width/2, 0);
+  // }
 }
 
 function mouseMoved(){
   //update cursor
+
   if (mouseX<width/2){
     noCursor();
   } else {
-    cursor(CROSS);
+    if (!alertIsActive){
+      cursor(CROSS);
+    } else {
+
+      cursor(ARROW);
+    }
   }
 }
 
 function mouseDragged(){
   //update cursor
-  if (mouseX<width/2){
-    noCursor();
-  } else {
-    cursor(CROSS);
-  }
 
+  if (mouseX<width/2){
+      noCursor();
+  } else {
+    if (!alertIsActive){
+      cursor(CROSS);
+    } else {
+    cursor(ARROW)
+    }
+  }
 }
 
 function mousePressed(){
   let isHover = [];
-  for (let i = 0; i < ui.length; i++){
-    isHover[i] = ui[i].checkHover(mouseX,mouseY);
-    if (isHover[i]){
-      
-      okToDraw = false;
-      clickedUI=i;
-      console.log('clickedUI true for ui['+i+']');
-      return;
-    } else {
-      clickedUI=null;
-      okToDraw = true;
+  if (!alertIsActive){
+
+    //non alert UIs
+    for (let i = 0; i < ui.length-2; i++){
+      isHover[i] = ui[i].checkHover(mouseX,mouseY);
+      if (isHover[i]){
+
+        okToDraw = false;
+        clickedUI=i;
+        console.log('clickedUI true for ui['+i+']');
+        return;
+      } else {
+        clickedUI=null;
+        okToDraw = true;
+      }
     }
-  }
-  
-  if (okToDraw){
-    playBrushSfx(brushIndex);
-    //remove any later save states ie. clear redo history
-    saveState.splice(saveStateIndex+1,max_saveStateIndex-saveStateIndex-1);
+    if (okToDraw){
+      playBrushSfx(brushIndex);
+      //remove any later save states ie. clear redo history
+      saveState.splice(saveStateIndex+1,max_saveStateIndex-saveStateIndex-1);
+    }
+  } else {
+    okToDraw = false;
+
+    //alert UIs
+    for (let i = ui.length-2; i < ui.length; i++){
+      isHover[i] = ui[i].checkHover(mouseX-width/2,mouseY);
+      if (isHover[i]){
+        clickedUI=i;
+        console.log('clickedUI true for ui['+i+']');
+        return;
+      } else {
+        clickedUI=null;
+      }
+    }
   }
 }
 
@@ -294,20 +426,104 @@ function mouseReleased() {
   if (okToDraw){
     //save state
     saveNewState();
-    
+
     pauseBrushSfx(brushIndex);
     if (isDrawing){
       pg.blendMode(BLEND);
       isDrawing = false;
     }
   } else {
-      if (clickedUI!=null){
+    if (clickedUI!=null){
+      if (clickedUI<ui.length-2){
         ui[clickedUI].clicked(mouseX,mouseY);
-        console.log('clicked func running for ui['+clickedUI+']');
+        if (alertIsActive){
+          rectMode(CENTER);
+          fill(0,120);
+          noStroke();
+          rect(width/4*3, height/2,width/2,height);
+        }
+      } else {
+        ui[clickedUI].clicked(mouseX-width/2,mouseY);
+      }
+      console.log('clicked func running for ui['+clickedUI+']');
     }
   }
 }
-  
+
+
+function setupAlertBox(){
+  ag.clear();
+
+  //main box
+  ag.rectMode(CENTER);
+  ag.stroke(0);
+  ag.strokeWeight(3);
+  ag.fill(255);
+  ag.rect(ag.width/2,height/2,ag.width/2,height/2.5);
+
+  //title bar
+  ag.stroke(0);
+  ag.strokeWeight(1);
+  ag.rectMode(CORNER);
+  ag.rect(ag.width/4+1,height/2-height/5+1,ag.width/2-2,height/25);
+
+  //warning icon in title bar + oneway icon in main body
+  ag.imageMode(CENTER);
+  ag.image(warning_icon,ag.width/2,height/2-height/5+1+height/50);
+  ag.image(oneway_icon,ag.width/4+80,height/2-height/20);
+
+  //text
+  ag.rectMode(CORNER);
+  // ag.noFill();
+  // ag.stroke(0);
+  // ag.rect(ag.width/4+70+oneway_icon.width/2+20,height/2-height/20-oneway_icon.height/2+30,ag.width/2-10-70-oneway_icon.width/2-10,oneway_icon.height/2-40);
+  // ag.rect(ag.width/4+70+oneway_icon.width/2+20,height/2-height/20-10,ag.width/2-10-70-oneway_icon.width/2-10,oneway_icon.height/2-10);
+  ag.fill(0);
+  ag.textAlign(LEFT);
+  ag.textWrap(WORD);
+  ag.textFont(font_ocraext);
+  ag.textSize(28);
+  ag.text('WARNING!',ag.width/4+70+oneway_icon.width/2+20,height/2-height/20-oneway_icon.height/2+30,ag.width/2-10-70-oneway_icon.width/2-10,oneway_icon.height/2-40);
+  ag.textFont(font_msyibaiti);
+  ag.textSize(20);
+  ag.text('this action cannot be undone. continue?',ag.width/4+70+oneway_icon.width/2+20,height/2-height/20-10,ag.width/2-10-70-oneway_icon.width/2-10,oneway_icon.height/2);
+
+  //mock alertbox buttons
+  ag.rectMode(CENTER);
+  ui[ui.length-1].move(mouseX-width/2,mouseY);
+  ui[ui.length-1].showInAlert();
+  ui[ui.length-2].move(mouseX-width/2,mouseY);
+  ui[ui.length-2].showInAlert();
+
+  imageMode(CORNER);
+  image(ag,width/2,0);
+}
+
+//open alert box
+function openAlert(thisFunction){
+  alertIsActive = true;
+  imageMode(CORNER);
+  image(ag, width/2, 0);
+  currFunction = thisFunction;
+}
+
+//close alert box
+function closeAlert(){
+  alertIsActive=false;
+  setupBase(currBase);
+  imageMode(CORNER);
+  image(pg,width/2,0);
+  console.log('closeAlert(): closed alert box.');
+}
+
+//close alert box AND run selected button function
+function runButtonFunction(){
+  closeAlert();
+  if (currFunction!=null){
+    currFunction();
+  }
+  currFunction = null;
+}
 
 //undo
 function undoToPreviousState() {
@@ -366,15 +582,13 @@ function setupBase(baseIndex){
 
 //change base template (ie. next)
 function changeBase(){
-  
-  //trigger warning that it will clear canvas
   pg.clear();
   saveStateIndex=0;
   saveState.splice(saveStateIndex,max_saveStateIndex-saveStateIndex-1);
   newpg[saveStateIndex] = createImage(width*density, height*density);
   newpg[saveStateIndex].copy(pg,0,0,width/2,height,0,0,width*density,height*density);
   saveState.push(newpg[saveStateIndex]);
-  
+
   if (currBase<base_template.length-1){
     currBase++;
   } else {
@@ -383,6 +597,9 @@ function changeBase(){
   setupBase(currBase);
   imageMode(CORNER);
   image(pg,width/2,0);
+  for (let i = 0; i < ui.length-2; i++){
+    ui[i].show();
+  }
 }
 
 function clearCanvas(){
@@ -415,15 +632,20 @@ function saveScreenshot(){
   pg.image(saveState[saveStateIndex], 0, 0,width/2,height);
 }
 
+//go to index.html
+function backtomain(){
+  window.location.href='index.html';
+}
+
 //brush tool
 function useBrush(thisBrush){
-  
+
   switch (thisBrush){
     case 0:
       //rainbow brush
       pg.colorMode(HSB);
-      
-      
+
+
       if (currBrushCol_0<360){
         currBrushCol_0++;
       } else {
@@ -454,13 +676,13 @@ function resetBrush(thisBrush){
 function playBrushSfx(thisBrush){
   let thisSfx;
   switch (thisBrush){
-    case 0: 
+    case 0:
       thisSfx = rainbow_sfx;
       break;
   }
-  
+
   if (Array.isArray(thisSfx)){
-    
+
   }else {
     if (thisSfx.isPlaying()==false){
       thisSfx.setVolume(1,0.5);
@@ -472,13 +694,13 @@ function playBrushSfx(thisBrush){
 function pauseBrushSfx(thisBrush){
   let thisSfx;
   switch (thisBrush){
-    case 0: 
+    case 0:
       thisSfx = rainbow_sfx;
       break;
   }
-  
+
   if (Array.isArray(thisSfx)){
-    
+
   }else {
     if (thisSfx.isPlaying()){
       thisSfx.setVolume(0,0.2);
@@ -488,48 +710,56 @@ function pauseBrushSfx(thisBrush){
 }
 
 class UIobj {
-  constructor(x, y, img, func, arg, sfx, jitterOnHover, timeInterval) {
+  constructor(x, y, img, func, arg, sfx, loopSfx, jitterOnHover, timeInterval) {
     this.x = x;
     this.y = y;
     this.img = img;
     this.func = func;
     this.arg = arg;
     this.sfx = sfx;
+    this.loopSfx = loopSfx;
     this.jitterOnHover = jitterOnHover;
     this.playedOnce = false;
     this.sourceX = x;
     this.sourceY = y;
     this.currFrame = 0;
     this.lastTime =0;
-    this.timeInterval = timeInterval; 
+    this.timeInterval = timeInterval;
   }
 
   clicked(px, py) {
     let d = dist(px, py, this.sourceX, this.sourceY);
-    if (d < 50) {
+    if (d < ((this.img[0].height/2)-10)) {
       this.func(this.arg);
       console.log('UI clicked.');
     }
+    // if (this.loopSfx){
+    //   if (Array.isArray(this.sfx)){
+    //     this.sfx[randomSfx].stop();
+    //   } else {
+    //     this.sfx.stop();
+    //   }
+    // }
   }
-  
+
   checkHover(px, py){
     let d = dist(px, py, this.sourceX, this.sourceY);
-    if (d < 40) {
+    if (d < ((this.img[0].height/2)-10)) {
       return true;
-    } 
+    }
   }
-  
-  move() {
-    let isHover = this.checkHover(mouseX,mouseY);
+
+  move(px,py) {
+    let isHover = this.checkHover(px,py);
 
     if (isHover){
-      
+
       //jitter animation
       if (this.jitterOnHover == true){
         this.x = this.sourceX+Math.random()*2;
         this.y = this.sourceY+Math.random()*2;
       }
-      
+
       //frame animation
       if (this.currFrame < this.img.length-1){
         if ((millis()-this.lastTime)>this.timeInterval){
@@ -542,16 +772,26 @@ class UIobj {
           this.lastTime=millis();
         }
       }
-     
-      
+
+
       //trigger sfx
+
       if (!this.playedOnce){
         if (Array.isArray(this.sfx)){
           let randomSfx = Math.floor(Math.random(0)*this.sfx.length);
-          this.sfx[randomSfx].stop();
-          this.sfx[randomSfx].play();
+          if (this.loopSfx){
+            this.sfx[randomSfx].loop();
+          } else {
+            this.sfx[randomSfx].stop();
+            this.sfx[randomSfx].play();
+          }
         } else {
-          this.sfx.play();
+          if (this.loopSfx){
+            this.sfx.loop();
+          } else {
+            this.sfx.stop();
+            this.sfx.play();
+          }
         }
         this.playedOnce = true;
       }
@@ -559,16 +799,30 @@ class UIobj {
       this.x = this.sourceX;
       this.y = this.sourceY;
       this.currFrame = 0;
-      
+
       if (this.playedOnce){
         this.playedOnce = false;
+      }
+
+      if (this.loopSfx){
+        if (Array.isArray(this.sfx)){
+          this.sfx[randomSfx].stop();
+        } else {
+          this.sfx.stop();
+        }
       }
     }
   }
 
   show() {
-    //display image in correct possition
+    //display image in correct position
     imageMode(CENTER);
     image(this.img[this.currFrame],this.x,this.y);
+  }
+
+  showInAlert(){
+    //display image in correct position
+    ag.imageMode(CENTER);
+    ag.image(this.img[this.currFrame],this.x,this.y);
   }
 }
