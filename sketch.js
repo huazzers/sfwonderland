@@ -39,6 +39,18 @@ let newbase_sfx;
 let backtomain_icon=[];
 let backtomain_sfx;
 
+let brushIndex = 0; //type of brush selected (default = 0)
+let brushScale = 1; //size of brush shape (default = 1)
+
+let maxBrushIndex=1; //start from 0
+let brush0_icon=[];
+let brush1_icon=[];
+
+let maxBrushScale = 3; //start from 1
+let brushscale1_icon=[];
+let brushscale2_icon=[];
+let brushscale3_icon=[];
+
 //data (arrays) of each alertbox element
 let warning_icon;
 let oneway_icon;
@@ -63,9 +75,6 @@ let currBrushCol_2; //B in RGB, B in HSB etc.
 let currBrushCol_alpha; // alpha value
 
 let lastBrushDownPosX, lastBrushDownPosY;
-
-let brushIndex = 0; //type of brush selected (default = 0)
-let brushScale = 1; //size of brush shape (default = 1)
 
 //data (arrays) of each drawing tool element
 //--brush 0 RAINBOW CIRCLE BRUSH
@@ -132,6 +141,27 @@ function preload(){
     backtomain_icon[i] = loadImage('assets/images/UI/back to main v2/'+nf((2*i)-1,4)+'.png');
   }
   backtomain_sfx = loadSound('assets/audio/tv-static.mp3');
+
+  //brush shape icons
+  brush0_icon[0] = loadImage('assets/images/UI/brush0_idle.png');
+  for (let i = 1; i<=12; i++){
+    brush0_icon[i] = loadImage('assets/images/UI/brush0_anim'+nf(i,4)+'.png');
+  }
+
+  brush1_icon[0] = loadImage('assets/images/UI/brush1_idle.png');
+  for (let i = 1; i<=10; i++){
+    brush1_icon[i] = loadImage('assets/images/UI/brush1_anim'+nf(i,4)+'.png');
+  }
+
+  //brush scale icons
+  brushscale1_icon[0] = loadImage('assets/images/UI/brushscale1_idle.png');
+  brushscale2_icon[0] = loadImage('assets/images/UI/brushscale2_idle.png');
+  brushscale3_icon[0] = loadImage('assets/images/UI/brushscale3_idle.png');
+  for (let i = 1; i<=10; i++){
+    brushscale1_icon[i] = loadImage('assets/images/UI/brushscale1_anim'+nf(i,4)+'.png');
+    brushscale2_icon[i] = loadImage('assets/images/UI/brushscale2_anim'+nf(i,4)+'.png');
+    brushscale3_icon[i] = loadImage('assets/images/UI/brushscale3_anim'+nf(i,4)+'.png');
+  }
 
   //load alert box images + sounds
   warning_icon = loadImage('assets/images/UI/alert.png');
@@ -203,9 +233,16 @@ function setup() {
   ui[3]= new UIobj(width/2+340,height-80,clear_icon,openAlert,clearCanvas,undoredo_sfx,false,false,90);
   ui[4]= new UIobj(width-80, height-80,newbase_icon,openAlert,changeBase,newbase_sfx,false,false,65);
   ui[5]= new UIobj(width/2+85,80,backtomain_icon,openAlert,backtomain,backtomain_sfx,true,false,65);
+  //brush scale UIs
+  ui[6]= new UIobj(width-80, 80, brushscale1_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
+  ui[7]= new UIobj(width-80, 80, brushscale2_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
+  ui[8]= new UIobj(width-80, 80, brushscale3_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
+  //brush shape UIs
+  ui[9]= new UIobj(width-180, 80, brush0_icon,changeBrushIndex,null,undoredo_sfx,false,false,83);
+  ui[10]= new UIobj(width-180, 80, brush1_icon,changeBrushIndex,null,undoredo_sfx,false,false,83);
   //alertUIs - MUST ALWAYS BE THE LAST 2 OBJECTS IN THE "ui" ARRAY!!
-  ui[6]=new UIobj(width/4-65,height*0.7-70,not_ok_dog_icon,closeAlert,null,not_ok_dog_sfx,false,true,83);
-  ui[7]=new UIobj(width/4+65,height*0.7-70,ok_dog_icon,runButtonFunction,null,ok_dog_sfx,false,true,83);
+  ui[11]=new UIobj(width/4-65,height*0.7-70,not_ok_dog_icon,closeAlert,null,not_ok_dog_sfx,false,true,83);
+  ui[12]=new UIobj(width/4+65,height*0.7-70,ok_dog_icon,runButtonFunction,null,ok_dog_sfx,false,true,83);
 
   //setup random base template
   currBase = int(Math.random()*3);
@@ -359,12 +396,48 @@ function draw() {
     }
 
     if (!alertIsActive){
-      for (let i = 0; i < ui.length-2; i++){
+      for (let i = 0; i < ui.length-7; i++){
         if (!isDrawing){
           ui[i].move(mouseX,mouseY);
         }
         ui[i].show();
       }
+      switch(brushScale){
+        case 1:
+          if (!isDrawing){
+            ui[6].move(mouseX,mouseY);
+          }
+          ui[6].show();
+          break;
+        case 2:
+          if (!isDrawing){
+            ui[7].move(mouseX,mouseY);
+          }
+          ui[7].show();
+          break;
+        case 3:
+          if (!isDrawing){
+            ui[8].move(mouseX,mouseY);
+          }
+          ui[8].show();
+          break;
+      }
+
+      switch(brushIndex){
+        case 0:
+          if (!isDrawing){
+            ui[9].move(mouseX,mouseY);
+          }
+          ui[9].show();
+          break;
+        case 1:
+          if (!isDrawing){
+            ui[10].move(mouseX,mouseY);
+          }
+          ui[10].show();
+          break;
+      }
+
     }
   }
 
@@ -679,7 +752,7 @@ function useBrush(thisBrush){
         currBrushCol_0=0;
       }
       pg.stroke(currBrushCol_0, currBrushCol_1, currBrushCol_2,currBrushCol_alpha);
-      pg.strokeWeight(20);
+      pg.strokeWeight(10*brushScale);
       if (mouseX>width/2){
         pg.line(pmouseX-width/2, pmouseY, mouseX-width/2, mouseY);
       } else {
@@ -790,6 +863,22 @@ function star(x, y, radius1, radius2, npoints) {
     pg.vertex(sx, sy);
   }
   pg.endShape(CLOSE);
+}
+
+function changeBrushIndex(){
+  if (brushIndex<maxBrushIndex){
+    brushIndex++;
+  } else {
+    brushIndex = 0;
+  }
+}
+
+function changeBrushScale(){
+  if (brushScale<maxBrushScale){
+    brushScale++;
+  } else {
+    brushScale = 1;
+  }
 }
 
 function resetBrush(thisBrush){
