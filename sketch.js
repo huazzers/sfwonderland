@@ -234,12 +234,12 @@ function setup() {
   ui[4]= new UIobj(width-80, height-80,newbase_icon,openAlert,changeBase,newbase_sfx,false,false,65);
   ui[5]= new UIobj(width/2+85,80,backtomain_icon,openAlert,backtomain,backtomain_sfx,true,false,65);
   //brush scale UIs
-  ui[6]= new UIobj(width-80, 80, brushscale1_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
-  ui[7]= new UIobj(width-80, 80, brushscale2_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
-  ui[8]= new UIobj(width-80, 80, brushscale3_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
+  ui[6]= new UIobj(width-100, 80, brushscale1_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
+  ui[7]= new UIobj(width-100, 80, brushscale2_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
+  ui[8]= new UIobj(width-100, 80, brushscale3_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
   //brush shape UIs
-  ui[9]= new UIobj(width-180, 80, brush0_icon,changeBrushIndex,null,undoredo_sfx,false,false,83);
-  ui[10]= new UIobj(width-180, 80, brush1_icon,changeBrushIndex,null,undoredo_sfx,false,false,83);
+  ui[9]= new UIobj(width-200, 80, brush0_icon,changeBrushIndex,null,undoredo_sfx,false,false,83);
+  ui[10]= new UIobj(width-200, 80, brush1_icon,changeBrushIndex,null,undoredo_sfx,false,false,83);
   //alertUIs - MUST ALWAYS BE THE LAST 2 OBJECTS IN THE "ui" ARRAY!!
   ui[11]=new UIobj(width/4-65,height*0.7-70,not_ok_dog_icon,closeAlert,null,not_ok_dog_sfx,false,true,83);
   ui[12]=new UIobj(width/4+65,height*0.7-70,ok_dog_icon,runButtonFunction,null,ok_dog_sfx,false,true,83);
