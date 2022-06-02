@@ -4,6 +4,13 @@
     <meta charset="utf-8">
     <script type="text/javascript">
 
+    function stopVideo(vidId){
+      var video = document.getElementById(vidId);
+      // or video = $('.video-selector')[0];
+      video.pause();
+      video.currentTime = 0;
+      video.load();
+    }
     function target_popup(form) {
     popupWindow=window.open('', 'formpopup', 'width=400,height=400,resizeable,scrollbars');
     form.target = 'formpopup';
@@ -44,10 +51,10 @@
       <nav>
         <ul class="nav-list">
           <li><a href="#home">🏠 Home</a></li>
-          <li><a href="#about">📚 About</a></li>
-          <li><a href="#submit">🎁 Submit</a></li>
-          <li><a href="#gallery">🖼️ Gallery</a></li>
-          <li><a href="#contact">📬 Contact</a></li>
+          <li><a href="#about" onclick="stopVideo('demovid-home')">📚 About</a></li>
+          <li><a href="#submit" onclick="stopVideo('demovid-home')">🎁 Submit</a></li>
+          <li><a href="#gallery" onclick="stopVideo('demovid-home')">🖼️ Gallery</a></li>
+          <li><a href="#contact" onclick="stopVideo('demovid-home')">📬 Contact</a></li>
         </ul>
       </nav>
 
@@ -431,7 +438,7 @@
           <div class="box">
             <h2>Welcome to s/f/wønderland</h2>
             <hr>
-            <video style="width:600px;max-width:100%;display: block;
+            <video id='demovid-home'style="width:600px;max-width:100%;display: block;
             margin:auto;border:none;" controls>
               <source src="assets/images/website/sfwonderland-play-demo-right.mp4" type="video/mp4">
             </video>
