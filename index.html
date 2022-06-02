@@ -4,6 +4,12 @@
     <meta charset="utf-8">
     <script type="text/javascript">
 
+    function target_popup(form) {
+    popupWindow=window.open('', 'formpopup', 'width=400,height=400,resizeable,scrollbars');
+    form.target = 'formpopup';
+    popupWindow.moveTo(screen.width*3/4-popupWindow.outerWidth,screen.height/2-popupWindow.outerHeight/2);
+}
+
     // Popup window code
     function newPopup(url) {
       var img = new Image();
@@ -17,7 +23,7 @@
     	popupWindow = window.open(
     		url,'popUpWindow','height=200,width=200,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
       popupWindow.resizeTo(300, 300);
-      popupWindow.moveTo(screen.width*3/4-popupWindow.outerWidth,screen.height/2-popupWindow.outerHeight);
+      popupWindow.moveTo(screen.width*3/4-popupWindow.outerWidth,screen.height/2-popupWindow.outerHeight/2);
     }
 
     </script>
@@ -224,7 +230,7 @@
               Feel free to share your creations with me, and I’ll put it up on the <a href="#gallery">virtual fridge door</a>. ^_^
             </p>
             <hr>
-            <form id="submission-form-id" class="submission-form-class" method="post"  enctype="multipart/form-data" action="https://getform.io/f/d6a19780-bd00-4d71-ac91-5c99edc1ab4f">
+            <form id="submission-form-id" class="submission-form-class" method="post"  enctype="multipart/form-data" action="https://getform.io/f/d6a19780-bd00-4d71-ac91-5c99edc1ab4f" onsubmit="target_popup(this)">
               <div class = "submission-form-group">
                 <label for= "fileselect">Upload:</label>
                 <div class = "submission-input-group">
