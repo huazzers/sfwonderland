@@ -106,7 +106,7 @@ main{
   /*border: 5px solid red;*/
 }
 
-/* Responsive layout*/
+/* Responsive layout
 @media screen and (max-width: 980px) {
   .split{
     width:100%;
@@ -116,7 +116,7 @@ main{
   }
 }
 
-/* Smartphones (portrait and landscape) ----------- */
+Smartphones (portrait and landscape) -----------
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
@@ -128,7 +128,7 @@ and (max-device-width : 480px) {
   }
 }
 
-/* Smartphones (landscape) ----------- */
+ Smartphones (landscape) -----------
 @media only screen
 and (min-width : 321px) {
   .split{
@@ -139,7 +139,7 @@ and (min-width : 321px) {
   }
 }
 
-/* Smartphones (portrait) ----------- */
+ Smartphones (portrait) -----------
 @media only screen
 and (max-width : 320px) {
   .split{
@@ -150,7 +150,7 @@ and (max-width : 320px) {
   }
 }
 
-/* iPads (portrait and landscape) -----------
+ iPads (portrait and landscape) -----------
 @media only screen
 and (min-device-width : 768px)
 and (max-device-width : 1024px) {
