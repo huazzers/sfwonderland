@@ -104,8 +104,8 @@ main{
 nav{
   position:sticky;
   top:0;
-  padding-top:20px;
-  padding-bottom:10px;
+  padding-top:10px;
+  padding-bottom:5px;
   width:100%;
   z-index:10;
   background-image: url('assets/images/website/bg_png_gif.gif');
