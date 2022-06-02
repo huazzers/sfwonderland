@@ -12,10 +12,11 @@
       video.load();
     }
     function target_popup(form) {
-    popupWindow=window.open('', 'formpopup', 'width=400,height=400,resizeable,scrollbars');
-    form.target = 'formpopup';
-    popupWindow.moveTo(screen.width*3/4-popupWindow.outerWidth,screen.height/2-popupWindow.outerHeight/2);
-}
+        popupWindow=window.open('', 'formpopup', 'width=400,height=400,resizeable,scrollbars');
+        form.target = 'formpopup';
+        popupWindow.moveTo(screen.width*3/4-popupWindow.outerWidth,screen.height/2-popupWindow.outerHeight/2);
+    }
+
 
     // Popup window code
     function newPopup(url) {
@@ -31,6 +32,7 @@
     		url,'popUpWindow','height=200,width=200,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
       popupWindow.resizeTo(300, 300);
       popupWindow.moveTo(screen.width*3/4-popupWindow.outerWidth,screen.height/2-popupWindow.outerHeight/2);
+      popupWindow.zoom(100); 
       img.style.margin = "auto";
     }
 
