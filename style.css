@@ -38,6 +38,7 @@ canvas {
 /* Control the left side */
 .left {
   left: 0;
+  cursor: none;
 }
 .left-logo{
   display: flex;
@@ -51,6 +52,7 @@ canvas {
   overflow: hidden;
   justify-content: center;
   height: 100%;
+
 }
 
 .left .center {
@@ -83,6 +85,14 @@ header{
   background-size: cover;
 }
 
+.offset:before {
+	display: block;
+ 	content: " ";
+  	height: 300px;      /* Give height of your fixed element */
+        margin-top: -300px; /* Give negative margin of your fixed element */
+        visibility: hidden;
+}
+
 main{
   display:block;
   padding: 0;
@@ -92,6 +102,7 @@ main{
 .right {
   right: 0;
   overflow-y: scroll;
+  cursor: default;
   /*border: 5px solid red;*/
 }
 
@@ -100,7 +111,7 @@ main{
   -moz-box-shadow: 0 0 11px rgba(255, 255, 255, 1);
   background: rgba(255,255,255,1);
   margin: 35px;
-  padding: 5px 20px 5px 20px;
+  padding: 5px 25px 5px 25px;
   border: 1px solid #b4b3b3;
   border-radius: 15px;
   position: relative;
@@ -113,23 +124,112 @@ main{
   position: relative;
 }
 
+section, section:target~.default-section{
+  display:none;
+}
+
+.default-section,section:target{
+  display:block;
+}
+
+.gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-between;
+}
+
+/* Create four equal columns that sits next to each other */
+.gallery-grid a{
+  flex-grow: 1;
+  flex-basis: 125px;
+  max-width: 250px;
+  padding:5px;
+  display: block;
+  margin: auto;
+}
+
+.gallery-grid img{
+  width: 100%;
+}
+
+.submission-form-group{
+  margin-bottom: 1rem;
+}
+
+.submission-input-group{
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  width: 100%;
+  margin-top:0.5rem;
+}
+
+textarea, input#email{
+  font-family: 'MS Yi BaiTi', serif;
+  font-size:1.3em;
+  height:auto;
+  resize:none;
+}
+/* Responsive layout - makes a two column-layout instead of four columns */
+/*@media screen and (max-width: 950px) {
+  .column img {
+    width: 100%;
+  }
+}*/
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+/*@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+}*/
+
 h1, h2, p {
 }
 
 h2{
-  font-size:1.75em;
-  line-height:0.8;
+  font-size:1.8em;
+  line-height:1.25;
   font-family: 'OCRAEXT', serif;
   text-align: center;
 }
 
-p,ol{
-  font-size:1.3em;
-  font-family: 'MS Yi BaiTi', serif;
+h3{
+  font-size:1.425em;
+  line-height:1;
+  font-family: 'OCRAEXT', serif;
+  text-align: left;
 }
 
-ol{
+p,ol,ul, label{
+  font-size:1.35em;
+  font-family: 'MS Yi BaiTi', serif;
+}
+li{
+  margin-top:0.75em;
+  margin-bottom:0.75em;
+}
+
+ol,ul{
   padding: 0px 20px 0px 40px;
+}
+
+ul.nav-list {
+  text-align:center;
+}
+ul.nav-list li{
+  display:inline-block;
+  margin:10px 5px 10px 5px;
+  padding: 0 5px 0 5px;
+  background-color:white;
+  font-family:'OCRAEXT', serif;
+  font-size:1em;
 }
 
 footer{

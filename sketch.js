@@ -59,6 +59,10 @@ let not_ok_dog_icon=[];
 let ok_dog_sfx=[];
 let not_ok_dog_sfx=[];
 
+let alertboxheight;
+let alertboxwidth;
+let alerttitleheight;
+
 //graphic to draw on
 let pg;
 
@@ -206,6 +210,8 @@ function setup() {
   rect(width/4,height/2,width/2,height);
   frameRate(60);
 
+
+
   //resize all base templates
   for (let i = 1; i <= 3; i++){
     base_template[i-1].resize(width/2,0);
@@ -227,22 +233,22 @@ function setup() {
   }
 
   //UIobj constructor(x, y, img, func, arg, sound, loopSfx, jitterOnHover, timeInterval)
-  ui[0]= new UIobj(width/2+80,height-80,save_icon,saveScreenshot,null,save_sfx,false,true,125);
-  ui[1]= new UIobj(width/2+180,height-80,undo_icon,undoToPreviousState,null,undoredo_sfx,false,false,90);
-  ui[2]= new UIobj(width/2+260,height-80,redo_icon,redoToNextState,null,undoredo_sfx,false,false,90);
-  ui[3]= new UIobj(width/2+340,height-80,clear_icon,openAlert,clearCanvas,undoredo_sfx,false,false,90);
-  ui[4]= new UIobj(width-80, height-80,newbase_icon,openAlert,changeBase,newbase_sfx,false,false,65);
-  ui[5]= new UIobj(width/2+85,80,backtomain_icon,openAlert,backtomain,backtomain_sfx,true,false,65);
+  ui[0]= new UIobj(width/2+70,height-70,save_icon,saveScreenshot,null,save_sfx,false,true,125);
+  ui[1]= new UIobj(width/2+170,height-70,undo_icon,undoToPreviousState,null,undoredo_sfx,false,false,90);
+  ui[2]= new UIobj(width/2+250,height-70,redo_icon,redoToNextState,null,undoredo_sfx,false,false,90);
+  ui[3]= new UIobj(width/2+330,height-70,clear_icon,openAlert,clearCanvas,undoredo_sfx,false,false,90);
+  ui[4]= new UIobj(width-70, height-70,newbase_icon,openAlert,changeBase,newbase_sfx,false,false,65);
+  ui[5]= new UIobj(width/2+75,70,backtomain_icon,openAlert,backtomain,backtomain_sfx,true,false,65);
   //brush scale UIs
-  ui[6]= new UIobj(width-100, 80, brushscale1_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
-  ui[7]= new UIobj(width-100, 80, brushscale2_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
-  ui[8]= new UIobj(width-100, 80, brushscale3_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
+  ui[6]= new UIobj(width-90, 70, brushscale1_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
+  ui[7]= new UIobj(width-90, 70, brushscale2_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
+  ui[8]= new UIobj(width-90, 70, brushscale3_icon,changeBrushScale,null,undoredo_sfx,false,false,83);
   //brush shape UIs
-  ui[9]= new UIobj(width-200, 80, brush0_icon,changeBrushIndex,null,undoredo_sfx,false,false,83);
-  ui[10]= new UIobj(width-200, 80, brush1_icon,changeBrushIndex,null,undoredo_sfx,false,false,83);
+  ui[9]= new UIobj(width-190, 70, brush0_icon,changeBrushIndex,null,undoredo_sfx,false,false,83);
+  ui[10]= new UIobj(width-190, 70, brush1_icon,changeBrushIndex,null,undoredo_sfx,false,false,83);
   //alertUIs - MUST ALWAYS BE THE LAST 2 OBJECTS IN THE "ui" ARRAY!!
-  ui[11]=new UIobj(width/4-65,height*0.7-70,not_ok_dog_icon,closeAlert,null,not_ok_dog_sfx,false,true,83);
-  ui[12]=new UIobj(width/4+65,height*0.7-70,ok_dog_icon,runButtonFunction,null,ok_dog_sfx,false,true,83);
+  ui[11]=new UIobj(width/4-65,height*0.7-20,not_ok_dog_icon,closeAlert,null,not_ok_dog_sfx,false,true,83);
+  ui[12]=new UIobj(width/4+65,height*0.7-20,ok_dog_icon,runButtonFunction,null,ok_dog_sfx,false,true,83);
 
   //setup random base template
   currBase = int(Math.random()*3);
@@ -254,16 +260,10 @@ function setup() {
   //setup alert graphic
   alertIsActive=false;
   ag = createGraphics(width/2, height);
-  ag.rectMode(CENTER);
-  ag.textAlign(LEFT, TOP);
-  ag.stroke(0);
-  ag.strokeWeight(3);
-  ag.fill(255);
-  ag.drawingContext.shadowBlur=20;
-  ag.drawingContext.shadowColor = 'white';
-  ag.rect(ag.width/2,height/2,ag.width/2,height/3);
-  ag.drawingContext.shadowBlur=0;
-  ag.drawingContext.shadowColor = color(0,0);
+  //set size of alert box parameters
+  alertboxheight=height/1.5;
+  alertboxwidth=ag.width/1.5;
+  alerttitleheight=height/20;
 
   //default drawing tool settings
   currBrushCol_0=0; //R in RGB, H in HSB etc.
@@ -561,18 +561,19 @@ function setupAlertBox(){
   ag.stroke(0);
   ag.strokeWeight(3);
   ag.fill(255);
-  ag.rect(ag.width/2,height/2,ag.width/2,height/2.5);
+  ag.rect(ag.width/2,height/2,alertboxwidth,alertboxheight);
 
   //title bar
   ag.stroke(0);
   ag.strokeWeight(1);
   ag.rectMode(CORNER);
-  ag.rect(ag.width/4+1,height/2-height/5+1,ag.width/2-2,height/25);
+  ag.rect(ag.width/2-alertboxwidth/2+1,height/2-alertboxheight/2+1,alertboxwidth-2,alerttitleheight);
 
   //warning icon in title bar + oneway icon in main body
   ag.imageMode(CENTER);
-  ag.image(warning_icon,ag.width/2,height/2-height/5+1+height/50);
-  ag.image(oneway_icon,ag.width/4+80,height/2-height/20);
+  ag.image(warning_icon,ag.width/2,height/2-alertboxheight/2+1+alerttitleheight/2);
+  ag.imageMode(CORNER);
+  ag.image(oneway_icon,ag.width/2-alertboxwidth/2,height/2-height/20-oneway_icon.height/2-20);
 
   //text
   ag.rectMode(CORNER);
@@ -585,10 +586,10 @@ function setupAlertBox(){
   ag.textWrap(WORD);
   ag.textFont(font_ocraext);
   ag.textSize(28);
-  ag.text('WARNING!',ag.width/4+70+oneway_icon.width/2+20,height/2-height/20-oneway_icon.height/2+30,ag.width/2-10-70-oneway_icon.width/2-10,oneway_icon.height/2-40);
+  ag.text('WARNING!',ag.width/2-alertboxwidth/2+70+oneway_icon.width/2+20,height/2-height/20-oneway_icon.height/2,ag.width/2-10-70-oneway_icon.width/2-10,oneway_icon.height/2-40);
   ag.textFont(font_msyibaiti);
   ag.textSize(20);
-  ag.text('this action cannot be undone. continue?',ag.width/4+70+oneway_icon.width/2+20,height/2-height/20-10,ag.width/2-10-70-oneway_icon.width/2-10,oneway_icon.height/2);
+  ag.text('this action cannot be undone. continue?',ag.width/2-alertboxwidth/2+70+oneway_icon.width/2+20,height/2-oneway_icon.height/2+ height/20,ag.width/2-20-oneway_icon.width/2,oneway_icon.height/2+40);
 
   //mock alertbox buttons
   ag.rectMode(CENTER);

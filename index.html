@@ -1,7 +1,24 @@
 <!DOCTYPE html><html lang="en"><head>
+    <title>🌈s/f/wønderland🌈</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
+    <script type="text/javascript">
 
+    // Popup window code
+    function newPopup(url) {
+      var img = new Image();
+      var height, width;
+      img.onload = function(){
+        height = img.height;
+        width = img.width;
+        // code here to use the dimensions
+      }
+      img.src=url;
+    	popupWindow = window.open(
+    		url,'popUpWindow','height=200px,width=200px,left='+window.innerWidth-width+',top='+window.innerHeight-height+',resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+    }
+
+    </script>
   </head>
   <body>
     <div class="split left">
@@ -15,72 +32,412 @@
         <div class="right-logo">
           <img src="assets/images/website/text_png_gif_widebanner.gif" alt="s/f/wønderland" class="center">
         </div>
+        <nav>
+          <ul class="nav-list">
+    				<li><a href="#home">🏠 Home</a></li>
+    				<li><a href="#about">📚 About</a></li>
+    				<li><a href="#submit">🎁 Submit</a></li>
+    				<li><a href="#gallery">🖼️ Gallery</a></li>
+            <li><a href="#contact">📬 Contact</a></li>
+    			</ul>
+        </nav>
       </header>
+
       <main>
-        <div class="no-box">
-          <a href="play-sfwonderland.html" class="PlaySfwonderland above-video"></a>
-          <video autoplay muted loop class="entrance-video hide-on-hover">
-            <source src="assets/images/website/last supper-idle.mp4" type="video/mp4" alt="">
-          </video>
-          <video autoplay muted loop class="entrance-video play-on-hover" alt="">
-            <source src="assets/images/website/last supper.mp4" type="video/mp4" >
-          </video>
 
-        </div>
-        <div class="box">
-          <h2>What is s/f/wønderland?</h2>
-          <p>s/f/wønderland is a web-based painting tool that explores fandom cultures as a transgressive and creative space for queer liberation, particularly in the context of state-enforced media censorship in Malaysia and Singapore.</p>
-        </div>
+        <section class="offset " id="about">
+          <div class="box">
+            <h2>About s/f/wønderland</h2>
+            <hr>
+            <h3>Background</h3>
+            <p>
+              <b><i>s/f/wønderland</i></b> was first conceptualised as a senior capstone project for my B.A. in Design Media Arts at the University of California, Los Angeles. My main intention for this project was to create queer art that is research-driven and collaborative, yet no less personally resonant. I knew from the start that this was going to be about queer existence(s) in my home context, namely Malaysia and Singapore.
+            </p>
+            <p>
+              Malaysia and Singapore both share similar histories as former British colonies, and are both ruled by conservative-leaning governments in their respective contexts. Due to media censorship policies, state erasure of queer history, criminalisation of acts of sodomy, and little to no protections of LGBTQ+ rights (among many other factors of queer stigma), looking for support systems, credible queer knowledge, and positive queer representation in these regions is, to say the least, <em>really fucking</em> hard. In the field of academia, most research on local queer communities here focus on healthcare and policy-related topics (and arguably necessarily so) - although such studies are already limited in number to begin with.
+            </p>
+            <p>
+              Given the general gap in literature and documentation regarding queer communities in these places where I grew up, I wanted to reflect on my role as a queer media artist that grew up in this environment, and explore queer existence and community creation in the age of social media. In particular, I was interested in how queer people learned about, and then later navigated queerness while existing in a mediated media landscape + social infrastructure that denies LGBTQ+ people any positive representation and legal protections*.
+            </p>
+            <p>
+              *For more information on Malaysia and Singapore’s policies regarding the lgbtq+ community, refer to the Penal Code Section 377 as a head start. I’d also recommend reading about censorship laws regarding “fake news” and “foreign interference” in these countries, too. As queerness is often erroneously framed as a Western import in these countries, many have reason to fear that these media laws might be misused to restrict their freedom of (queer) expression.
+            </p>
+            <br/>
+            <h3>Method</h3>
+            <p>
+              During my spring break, I invited 6 friends to discuss their observations and experiences navigating social media as people who:
+            </p>
+            <ol>
+              <li>
+                identified somewhere under the queer umbrella; AND
+              </li>
+              <li>
+                had experiences growing up in Malaysia and/or Singapore.
+              </li>
+            </ol>
+            <p>
+              All of us happened to be born in the 90s or early 2000s, and began using the internet in our late-primary ~ early-secondary school days.
+            </p>
+            <p>
+              Through our conversations, we learned that most of us had our first encounter of queerness through fan fiction and queer fandom pairings on the Internet - many shared experiences reading slash on fanfic.net, in particular. This media platform provided an alternative source of knowledge and guidance beyond parental figures, state-controlled media, and educational institutions.
+            </p>
+            <p>
+              As such, for my capstone project, I wanted to focus on the (re)imagination of queerness through media appropriations of censored content as a form of creative resistance against oppressive state-enforced infrastructures. While every participant has their own understanding of the role queer fandoms play in the broader political environment*, most believe that the transgressive nature of queer fan-made narratives and worlds are not merely avenues for escapism, but are also capable of shifting attitudes and perceptions concerning queerness on a broader societal level.
+            </p>
+            <p>
+              *Some participants shared that they saw queer fandoms as a way to “correct” or “hack” inaccurate / negative / violent depictions of queer people in mainstream media, while others are more inclined to view fandoms as an alternative outlet for “reimagination” which provides its own form of agency.
+            </p>
+            <br/>
+            <h3>
+              References
+            </h3>
+            <p>
+              Zoyander Street’s Interactive Portraits: Trans People in Japan was a huge inspiration not only for this project, but also for my media art practice in general. It helped me realise that game-making and ethnographic research do not have to be mutually exclusive practices; that research can culminate into something other than a densely-worded dissertation paper; that games can be a new way of understanding and engaging with the knowledge we create. It’s the game that really got me excited about the practice of game-making and conducting research as an artist, so huge kudos to Zoyander and their work! Zoyander also wrote an insightful chapter about community histories and challenging normative research practices in Bo Ruberg and Adrienne Shaw’s book titled Queer Game Studies, which was helpful in informing my approach to s/f/wønderland.
+            </p>
+            <p>
+              Other research references / inspirations included Chaoyang Trap’s article on Chinese fanfic writers navigating post-AO3 ban era and cartographic charts marking queer presence + history in Queering The Map and Pink Dot SG’s Love Lives Here.
+            </p>
+            <br/>
+          </div>
+          <div class="box">
+            <h2>
+              About the Artist
+            </h2>
+            <hr>
+            <h3>
+              HUA CHAI (they/he)
+            </h3>
+            <p>
+              Hua is a gender-glitched experimental interactive media artist and animator who is interested in researching the intersections between queerness, transnational experiences, post/neo-colonialism, and digital bodies+communities on the Interwebs. They like to explore games as a medium for communicating the complex nuances of socially-constructed identities like gender, sexuality, language, and nationality, as well as how they interface with broader interpersonal relationships and socio-political infrastructures. Ever since they relocated to U.S.A for their tertiary education, Hua has been navigating the implications of discussing themes of liberation and recovery from colonial trauma in their home context while existing on foreign, occupied land.
+            </p>
+            <p>
+              Hua’s independent animations and video games have been showcased at events like Cartoons Underground (Singapore), Melbourne Queer Games Festival (Australia), and Animation Chico (USA).
+            </p>
+            <p>
+              To learn more about their work, please visit: huachai-portfolio.carrd.co
+            </p>
+          </div>
+          <div class="box">
+            <h2>
+              Acknowledgements
+            </h2>
+            <hr>
+            <h3>
+              Land Acknowledgement
+            </h3>
+            <p>
+              Although s/f/wønderland is primarily rooted in the context of Malaysia and Singapore, this project was created while I was residing on the traditional land of the Chumash and Tongva people. As a beneficiary of the resources and support granted by the University of California, Los Angeles, I recognise my complicity in the historical and ongoing legacy of land theft initiated by colonial settlers since the 18th century. As an international student, my access to queer safety and freedom of expression has not been without my participation in settler colonialism. Moving forward, I want to continue confronting what it means to live on stolen land, and further contemplate ways in which we can support disenfranchised and Native communities. For starters, I recommend reading Eve Tuck and K. Wayne Yang’s “Decolonization is not a Metaphor”, an article which foregrounds how settler colonialism operates and what “decolonisation” really entails.
+            </p>
+            <br/>
+            <h3>
+              Thanks
+            </h3>
+            <p>
+              To Jenna Caravello, Michael Luo, and the Class of DMA:159 Senior Capstone (Spring 2022), for their continued support and feedback throughout the school term.
+            </p>
+            <p>
+              To Eddo Stern, for his mentorship throughout my Independent Study course in which we read and discussed books on queer game studies - although much of what we read was based in an American context, it was ultimately helpful in putting my own experiences in Malaysia and Singapore into perspective.
+            </p>
+            <p>
+              To Lauren McCarthy and Tyler Stefanich, for their advice and assistance re: ideas for installation setup.
+            </p>
+            <br/>
+            <h3>
+              Special Thanks
+            </h3>
+            <p>
+              To all participants, for their continued contributions and their thoughtful engagements with this project.
+            </p>
+            <p>
+              To Shon, for sharing her bachelor’s dissertation titled “Love, Queerly Reimagined: Negotiating Normativity in Boys’ Love (BL) Fandom Cultures” with me, and for being a supportive and inspirational presence throughout this journey.
+            </p>
+            <p>
+              To Laurent Yee, for encouraging me to explore disruptive interface designs, and being a great friend with whom I can get excited about similar creative interests re: collaborative art-making, using and making non-conventional creative tools, experimental designs etc.
+            </p>
+            <p>
+              To Finn See, for collating their abundant library of articles, policy papers and other resources pertaining to LGBTQ+-related topics in Malaysia during my research.
+            </p>
+            <p>
+              To Zedeck Siew, for sharing his wisdom and advice for navigating research and art-making as a Malaysian in an anglocentric space.
+            </p>
+            <p>
+              To Patrick Michael Ballard, for being a welcoming and friendly presence in the Game Lab, and for always being up for a chat re: art-making and one’s relationship with their own practice.
+            </p>
+            <p>
+              To White Stapler, for lending me their mini projector for my midterm presentation.
+            </p>
+            <br/>
+            <h3>
+              Stuff I used
+            </h3>
+            <p>
+              Sounds from freesound.org
+            </p>
+            <ul>
+              <li>
+                catpurrchirp by dreamstobecome
+              </li>
+              <li>
+                Sparkle 1, Sparkle 2, Sparkle 3 by zuben
+              </li>
+              <li>
+                TinyBell by Haasenstein
+              </li>
+              <li>
+                Fantasy Magic Button by solo654
+              </li>
+              <li>
+                Heal - Rpg by colorsCrimsonTears
+              </li>
+              <li>
+                Snap Layered 01 by JoshuaPomeroy
+              </li>
+              <li>
+                TV Restart by younoise
+              </li>
+              <li>
+                Scrambled Telecommunications by Raining-On-Saturn
+              </li>
+            </ul>
+            <p>
+              3D models from TurboSquid
+            </p>
+            <ul>
+              <li>
+                Spoon Fork Knife Cutlery Set 3D model by jondetski
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="offset " id="submit">
+          <div class="box">
+            <h2>
+              Submit
+            </h2>
+            <p>
+              Feel free to share your creations with me, and I’ll put it up on the <a href="#gallery">virtual fridge door</a> ^_^
+            </p>
+            <hr>
+            <form id="submission-form-id" class="submission-form-class" method="post"  enctype="multipart/form-data" action="https://getform.io/f/d6a19780-bd00-4d71-ac91-5c99edc1ab4f">
+              <div class = "submission-form-group">
+                <label for= "fileselect">Upload:</label>
+                <div class = "submission-input-group">
+                  <input type="file" name="upload[]" multiple accept=".jpg, .jpeg .png" id="fileselect" onchange="checkFileUploadExt(this);" required>
+                  <script>
+                  //attaching "change" event to the file upload button
+                  document.getElementById("fileselect").addEventListener("change", validateFile)
 
-        <div class="box">
-        <h2>How it works</h2>
-          <ol>
-            <li>Select a <strong>base template.</strong></li>
-            <li>Play with <strong>brushes, stamps, backgrounds, filters and text</strong> - let your imagination run wild!</li>
-            <li>Save your masterpiece - or share it with the world!</li>
-          </ol>
-        </div>
+                  function validateFile(){
+                    const allowedExtensions =  ['jpg', 'jpeg','png'],
+                          sizeLimit = 1000000; // 1 megabyte
 
-        <!--<div class="box">
-          <p><a href="https://huazzers.github.io/sfwonderland/">enter s/f/wønderland</a></p>
-        </div>-->
+                    // destructuring file name and size from file object
+                    const { name:fileName, size:fileSize } = this.files[0];
 
-        <div class="box">
-          <h2>Background</h2>
-          <p>
-            given the gap in literature and documentation regarding queer communities* in places i grew up (Malaysia and Singapore), i wanted this project to explore queer existence from the perspective of social media and digital community creation. in particular, i was interested in how queer people learned about and later navigate queerness in a local media landscape + social infrastructure that denies lgbtq+ people of any positive representation nor legal protections**.
-          </p>
+                    /*
+                    * if filename is apple.png, we split the string to get ["apple","png"]
+                    * then apply the pop() method to return the file extension
+                    *
+                    */
+                    const fileExtension = fileName.split(".").pop();
 
+                    /*
+                      check if the extension of the uploaded file is included
+                      in our array of allowed file extensions
+                    */
+                    if(!allowedExtensions.includes(fileExtension)){
+                      alert("file type not allowed. please upload .jpg, .jpeg, or .png files only.");
+                      this.value = null;
+                    }else if(fileSize > sizeLimit){
+                      alert("file size too large. max limit: 1MB")
+                      this.value = null;
+                    }
+                  }
+                  </script>
+                </div>
+              </div>
+              <div class = "submission-form-group">
+                <label for= "email">Your email address:</label>
+                <div class = "submission-input-group">
+                  <input type="email" name="email" id="email" required>
+                </div>
+              </div>
+              <div class = "submission-form-group">
+                <label for= "message">Message (optional):</label>
+                <div class = "submission-input-group">
+                  <textarea onkeydown="remainingChars(800, this)" type="message" name="message" id="message" rows="10" cols="75" maxlength="800"></textarea>
+                  <div style="margin-left: auto; margin-right: 0;"><span id="remainingChars"> </span></div>
+                </div>
+              </div>
+              <div class = "submission-form-group">
+                <button type="submit" id="submission-button">Submit</button>
+              </div>
+            </form>
 
-          <!--
-          *most research on local queer communities in Malaysia and Singapore focus on healthcare and policy-related topics (and arguably necessarily so.)
+            <!--character counter>-->
+            <script type="text/javascript">
+            var remainingChars= function(maxChars, input){
+              var totalChars= input.value.length;
+              var remaining= (maxChars - totalChars);
+              var displayChars=document.getElementById('remainingChars');
 
-          **for more information on Malaysia and Singapore’s policies regarding the lgbtq+ community, refer to the Penal Code Section 377 as a head start. i’d also recommend reading about censorship laws regarding “fake news” and “foreign interference” in these countries, too, which many reasonably fear would be misused to restrict freedom of expression (even re: queer representation.)
-          -->
+              if(remaining>0){
+              displayChars.innerHTML="Character Count: "+remaining+"/"+maxChars;
+              displayChars.style.color="green";
+              input.style.borderColor = "green";
+              }else{
+              displayChars.innerHTML="Remaining character: 0";
+              displayChars.style.color="red";
+              input.style.borderColor = "red";
+              }
+            }
+            </script>
 
-          <p>
-            during the spring break, i spoke with 6 friends who: (1) identified somewhere under the queer umbrella, AND (2) had experiences growing up in Malaysia and/or Singapore.
-          </p>
-          <p>
-            all of us happened to be born in the 90s or early 2000s, and began using the internet in our late-primary ~ early-secondary school days.
-          </p>
-          <p>
-            through our conversations, we learned that most of us first came into contact with the notion of queerness through fan fiction and queer fandom pairings on the internet - many shared experiences reading slash on fanfic.net, in particular - which provided an alternative source of knowledge and guidance beyond parental figures and local media + educational institutions. as such, for my capstone project, i wanted to explore the (re)imagination of queerness* through media appropriations of censored content as a form of creative resistance against oppressive state-enforced infrastructures. while every participant has their own understanding of the role queer fandoms play in the broader political environment**, most believe that the transgressive nature of queer fan-made narratives and worlds are not merely avenues for escapism, but are also capable of shifting attitudes and perceptions concerning queerness on a broader societal level.
-          </p>
+          </div>
+        </section>
+        <section class="offset " id="contact">
+          <div class="box">
+            <h2>
+              Contact
+            </h2>
+            <p>
+              For any queries, please contact Hua Chai.
+            </p>
+            <p>
+              Email: chai.callmehua(at)gmail.com.
+            </p>
+            <p>
+              Twitter: @huazzers
+            </p>
+          </div>
+        </section>
+        <section class="offset " id="gallery">
 
-          <!--
-            *inspired by my partner Cheng Shon’s bachelor’s thesis titled “Love, Queerly Reimagined: Negotiating Normativity in Boys’ Love (BL) Fandom Cultures.”
+          <div class="box">
+            <h2>
+              Gallery
+            </h2>
+            <div class="gallery-grid">
+                <a href="JavaScript:newPopup('assets/images/gallery/6RAG04mX.jpg');">
+                  <img src="assets/images/gallery/6RAG04mX.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/Cvy92U8M.jpg');">
+                  <img src="assets/images/gallery/Cvy92U8M.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/lbRWWHGd.jpg');">
+                  <img src="assets/images/gallery/lbRWWHGd.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/M3QqmT4l.jpg');">
+                  <img src="assets/images/gallery/M3QqmT4l.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/photo_2022-04-23_23-56-23.jpg');">
+                  <img src="assets/images/gallery/photo_2022-04-23_23-56-23.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/photo_2022-04-24_00-00-43.jpg');">
+                  <img src="assets/images/gallery/photo_2022-04-24_00-00-43.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/photo_2022-04-24_00-03-46.jpg');">
+                  <img src="assets/images/gallery/photo_2022-04-24_00-03-46.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220411143810.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220411143810.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220421102415.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220421102415.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220423214112.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220423214112.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220423214739.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220423214739.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220423215328.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220423215328.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220423220046.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220423220046.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220423220459.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220423220459.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220424150135.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220424150135.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220424150424.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220424150424.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220424150823.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220424150823.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220426224648.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220426224648.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220426225047.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220426225047.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220426225520.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220426225520.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220427132954.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220427132954.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220427153452.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220427153452.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220427154128.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220427154128.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/Testing.jpg');">
+                  <img src="assets/images/gallery/Testing.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/vutZI4-4.jpg');">
+                  <img src="assets/images/gallery/vutZI4-4.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/xhXQVp3-.jpg');">
+                  <img src="assets/images/gallery/xhXQVp3-.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/XrHJnwov.jpg');">
+                  <img src="assets/images/gallery/XrHJnwov.jpg" alt=""/>
+                </a>
+                <a href="JavaScript:newPopup('assets/images/gallery/SFWONDERLAND_20220601125119.jpg');">
+                  <img src="assets/images/gallery/SFWONDERLAND_20220601125119.jpg" alt=""/>
+                </a>
+            </div>
+          </div>
+        </section>
+        <section class="offset default-section " id="home">
+          <div class="no-box">
+            <a href="play-sfwonderland.html" class="PlaySfwonderland above-video"></a>
+            <video autoplay muted loop class="entrance-video hide-on-hover">
+              <source src="assets/images/website/last supper-idle.mp4" type="video/mp4" alt="">
+            </video>
+            <video autoplay muted loop class="entrance-video play-on-hover" alt="">
+              <source src="assets/images/website/last supper.mp4" type="video/mp4" >
+            </video>
 
-            **some see queer fandoms as a way to “correct” or “hack” inaccurate / negative / violent depictions of queer people in mainstream media, while others are more inclined to view fandoms as an alternative outlet for “reimagination” which provides its own form of agency
-          -->
-          <p>
-            other research references / interests included Chaoyang Trap’s article on Chinese fanfic writers navigating post-AO3 ban era and cartographic charts marking queer presence + history in Queering The Map and Pink Dot SG’s “Love Lives Here.”
-          </p>
-          <p>
-            while this project is primarily made with my participating friends in mind, it is also available for other people who are familiar with / grew up with / dare i say, thrived through queer fandoms, particularly when they are unable to enjoy such queer freedoms openly in their own environment due to fear of prosecution, social stigma etc.
-          </p>
+          </div>
+          <div class="box">
+            <h2>Welcome to s/f/wønderland</h2>
+            <p><i>s/f/wønderland</i> is a web-based painting tool that explores fandom cultures as a transgressive and creative space for queer liberation, particularly in the context of state-enforced media censorship in Malaysia and Singapore.</p>
+          </div>
 
-        </div>
+          <div class="box">
+          <h2>How it works</h2>
+            <ol>
+              <li>Select a <b>base template.</b></li>
+              <li>Play with <b>brushes</b> of various shapes and sizes - let your imagination run wild!</li>
+              <li>Save your masterpiece - or share it with the world!</li>
+            </ol>
+            <p>
+              Note:
+            </p>
+            <ul>
+              <li>This painting tool works best on a <strong>fullscreen desktop browser with audio turned on</strong>! </li>
+              <li>If you have photosensitive epilepsy, please proceed with caution - there will be flashing colours and images on the left half of the window. A possible workaround is to adjust the size of your browser window to half its original width <strong>after</strong> opening the painting tool, then scroll to the right so that only the right half of the tool is visible.</li>
+            </ul>
+            <p>Feel free to <a href="#submit">share your creations with me</a>, and I’ll put it up on the <a href="#gallery">virtual fridge door</a> ^_^ </p>
+          </div>
+        </section>
       </main>
       <footer>
 
