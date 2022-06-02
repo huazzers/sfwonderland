@@ -15,7 +15,9 @@
       }
       img.src=url;
     	popupWindow = window.open(
-    		url,'popUpWindow','height=200px,width=200px,left='+window.innerWidth-width+',top='+window.innerHeight-height+',resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+    		url,'popUpWindow','height=200,width=200,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+      popupWindow.resizeTo(300, 300);
+      popupWindow.moveTo(screen.width*3/4-popupWindow.outerWidth,screen.height/2-popupWindow.outerHeight);
     }
 
     </script>
