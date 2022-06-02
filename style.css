@@ -72,12 +72,7 @@ canvas {
 }
 
 header{
-  position:sticky;
-  top:0;
-  padding-top:20px;
-  padding-bottom:10px;
-  width:100%;
-  z-index:10;
+
 
   background-image: url('assets/images/website/bg_png_gif.gif');
   background-repeat: no-repeat;
@@ -104,6 +99,19 @@ main{
   overflow-y: scroll;
   cursor: default;
   /*border: 5px solid red;*/
+}
+
+nav{
+  position:sticky;
+  top:0;
+  padding-top:20px;
+  padding-bottom:10px;
+  width:100%;
+  z-index:10;
+  background-image: url('assets/images/website/bg_png_gif.gif');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 /* Responsive layout
