@@ -150,7 +150,7 @@ and (max-width : 320px) {
   }
 }
 
-/* iPads (portrait and landscape) ----------- */
+/* iPads (portrait and landscape) -----------
 @media only screen
 and (min-device-width : 768px)
 and (max-device-width : 1024px) {
@@ -160,7 +160,7 @@ and (max-device-width : 1024px) {
   .left{
     display:none;
   }
-}
+}*/
 
 .box{
   -webkit-box-shadow: 0 0 11px rgb(255 255 255);
