@@ -22,8 +22,8 @@
       var img = new Image();
       var height, width;
       img.onload = function(){
-        height = img.height;
-        width = img.width;
+        imgheight = img.height;
+        imgwidth = img.width;
         // code here to use the dimensions
       }
       img.src=url;
@@ -31,6 +31,7 @@
     		url,'popUpWindow','height=200,width=200,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
       popupWindow.resizeTo(300, 300);
       popupWindow.moveTo(screen.width*3/4-popupWindow.outerWidth,screen.height/2-popupWindow.outerHeight/2);
+      img.style.margin = "auto";
     }
 
     </script>
