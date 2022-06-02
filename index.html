@@ -17,11 +17,12 @@
         popupWindow=window.open('', 'formpopup', 'width=400,height=400,resizeable,scrollbars');
         form.target = 'formpopup';
         popupWindow.moveTo(screen.width*3/4-popupWindow.outerWidth,screen.height/2-popupWindow.outerHeight/2);
-        //reset form
 
-        setTimeout(form.reset(),2800);
     }
 
+    function resetForm(id){
+      document.getElementById(id).reset();
+    }
 
     // Popup window code
     function newPopup(url) {
@@ -58,11 +59,11 @@
       </header>
       <nav>
         <ul class="nav-list">
-          <li><a href="#home">🏠 Home</a></li>
-          <li><a href="#about" onclick="stopVideo('demovid-home')">📚 About</a></li>
-          <li><a href="#submit" onclick="stopVideo('demovid-home')">🎁 Submit</a></li>
-          <li><a href="#gallery" onclick="stopVideo('demovid-home')">🖼️ Gallery</a></li>
-          <li><a href="#contact" onclick="stopVideo('demovid-home')">📬 Contact</a></li>
+          <li><a href="#home" onclick="resetForm('submission-form-id')">🏠 Home</a></li>
+          <li><a href="#about" onclick="stopVideo('demovid-home');resetForm('submission-form-id')">📚 About</a></li>
+          <li><a href="#submit" onclick="stopVideo('demovid-home');resetForm('submission-form-id')">🎁 Submit</a></li>
+          <li><a href="#gallery" onclick="stopVideo('demovid-home');resetForm('submission-form-id')">🖼️ Gallery</a></li>
+          <li><a href="#contact" onclick="stopVideo('demovid-home');resetForm('submission-form-id')">📬 Contact</a></li>
         </ul>
       </nav>
 
