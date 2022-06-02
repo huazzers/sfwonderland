@@ -3,7 +3,9 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
     <script type="text/javascript">
-
+    function showCode(){
+      document.getElementById('secret-code-home').innerHTML="< CLICK TV TO PLAY >";
+    }
     function stopVideo(vidId){
       var video = document.getElementById(vidId);
       // or video = $('.video-selector')[0];
@@ -15,6 +17,9 @@
         popupWindow=window.open('', 'formpopup', 'width=400,height=400,resizeable,scrollbars');
         form.target = 'formpopup';
         popupWindow.moveTo(screen.width*3/4-popupWindow.outerWidth,screen.height/2-popupWindow.outerHeight/2);
+        //reset form
+
+        setTimeout(form.reset(),1500);
     }
 
 
@@ -428,6 +433,11 @@
           </div>
         </section>
         <section class="offset default-section " id="home">
+          <div class="box" style="border-color: rgba(120, 165, 117, 1);border-width:3px;border-radius:0;width:45%; margin:auto; background:rgba(51, 79, 87, 1)">
+            <p style="color:rgba(248, 255, 222, 1);line-height:1.35em;font-family:'OCRAEXT', serif;font-size:1em;text-align:center">
+              👀👉📺▶️🌈
+            </p>
+          </div>
           <div class="no-box">
             <a href="play-sfwonderland.html" class="PlaySfwonderland above-video"></a>
             <video autoplay muted loop class="entrance-video hide-on-hover">
