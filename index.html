@@ -44,6 +44,24 @@
 
     </script>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ncase/nutshell@1.0.2/nutshell.min.js"></script>
+    <style>
+    .nutshell-heading:hover .nutshell-heading-embed{
+        opacity:0;
+    }
+    .nutshell-heading:hover .nutshell-heading-embed:hover{
+        opacity:0;
+    }
+    .nutshell-expandable-text, .nutshell-bubble-overflow p, .nutshell-bubble-overflow ul{
+      font-size: 1em;
+      font-family: 'MS Yi BaiTi', serif;
+    }
+
+    .nutshell-bubble{
+      -webkit-box-shadow: 0 0 11px rgba(255, 84, 169, 1);
+      -moz-box-shadow: 0 0 11px rgba(255, 84, 169, 1);
+    }
+    </style>
   </head>
   <body>
     <div class="split left">
@@ -69,26 +87,24 @@
       </nav>
 
       <main>
-
         <section class="offset " id="about">
           <div class="box">
             <h2>About s/f/wønderland</h2>
             <hr>
             <h3>Background</h3>
+            <div class="box callout">
+              <h4>⚠️ Note</h4>
+              <p><i>This section was last updated on <strong>August 31, 2022</strong>. Any later developments beyond this date may not have been recorded or accounted for on this page.</i></p>
+            </div>
             <p>
               <b><i>s/f/wønderland</i></b> was first conceptualised as a senior capstone project for my B.A. in Design Media Arts at the University of California, Los Angeles. My main intention for this project was to create queer art that is research-driven and collaborative, yet no less personally resonant. I knew from the start that this was going to be about queer existence(s) in my home context, namely Malaysia and Singapore.
             </p>
             <p>
-              Malaysia and Singapore both share similar histories as former British colonies, and are both ruled by conservative-leaning governments in their respective contexts. Due to media censorship policies, state erasure of queer history, criminalisation of acts of sodomy, and little to no protections of LGBTQ+ rights (among many other factors of queer stigma), looking for support systems, credible queer knowledge, and positive queer representation in these regions is, to say the least, <em>really fucking</em> hard. In the field of academia, most research on local queer communities here focus on healthcare and policy-related topics (and arguably necessarily so) - although such studies are already limited in number to begin with.
+              Malaysia and Singapore both share similar histories as former British colonies, and are both ruled by conservative-leaning governments in their respective contexts. Due to <a href="#Censorship">:media censorship policies</a>, <a href="#QueerHistory">:state erasure of queer history</a>, <a href="#PenalCodeSection377">:criminalisation of acts of sodomy<a>, and little to no protections of LGBTQ+ rights (among many other factors of queer stigma), looking for support systems, credible queer knowledge, and positive queer representation in these regions is, to say the least, <em>really fucking</em> hard. In the field of academia, most research on local queer communities here focus on healthcare and policy-related topics (and arguably necessarily so) - although such studies are already limited in number to begin with.
             </p>
             <p>
-              Given the general gap in literature and documentation regarding queer communities in these places where I grew up, I wanted to reflect on my role as a queer media artist that grew up in this environment, and explore queer existence and community creation in the age of social media. In particular, I was interested in how queer people learned about, and then later navigated queerness while existing in a mediated media landscape + social infrastructure that denies LGBTQ+ people any positive representation and legal protections.✨
+              Given the general gap in literature and documentation regarding queer communities in these places where I grew up, I wanted to reflect on my role as a queer media artist that grew up in this environment, and explore queer existence and community creation in the age of social media. In particular, I was interested in how queer people learned about, and then later navigated queerness while existing in a mediated media landscape + social infrastructure that <a href="#MoreInfoOnMalaysiaAndSingaporeLGBTQ+Policies">:denies LGBTQ+ people any positive representation and legal protections.</a>
             </p>
-            <div class="box callout">
-              <p>
-                <b>✨ For more information on Malaysia and Singapore’s policies regarding the LGBTQ+ community</b>, refer to the Penal Code Section 377 as a head start. I’d also recommend reading about censorship laws regarding “fake news” and “foreign interference” in these countries, too. As queerness is often erroneously framed as a Western import in these countries, many have reason to fear that these media laws might be misused to restrict their freedom of (queer) expression.
-              </p>
-            </div>
             <br/>
             <h3>Method</h3>
             <p>
@@ -109,13 +125,8 @@
               Through our conversations, we learned that most of us had our first encounter of queerness through fan fiction and queer fandom pairings on the Internet - many shared experiences reading slash on fanfic.net, in particular. This media platform provided an alternative source of knowledge and guidance beyond parental figures, state-controlled media, and educational institutions.
             </p>
             <p>
-              As such, for my capstone project, I wanted to focus on the (re)imagination of queerness through media appropriations of censored content as a form of creative resistance against oppressive state-enforced infrastructures. While every participant has their own understanding of the role queer fandoms play in the broader political environment💡, most believe that the transgressive nature of queer fan-made narratives and worlds are not merely avenues for escapism, but are also capable of shifting attitudes and perceptions concerning queerness on a broader societal level.
+              As such, for my capstone project, I wanted to focus on the (re)imagination of queerness through media appropriations of censored content as a form of creative resistance against oppressive state-enforced infrastructures. While every participant has their own understanding of <a href="#DifferentUnderstandingsOfQueerFandoms">:the role queer fandoms play in the broader political environment</a>, most believe that the transgressive nature of queer fan-made narratives and worlds are not merely avenues for escapism, but are also capable of shifting attitudes and perceptions concerning queerness on a broader societal level.
             </p>
-            <div class="box callout">
-              <p>
-                💡 Some participants shared that they saw queer fandoms as a way to “correct” or “hack” inaccurate / negative / violent depictions of queer people in mainstream media, while others are more inclined to view fandoms as an alternative outlet for “reimagination” which provides its own form of agency.
-              </p>
-            </div>
             <br/>
             <h3>
               Installation Setup
@@ -261,7 +272,83 @@
                 <a href="https://www.turbosquid.com/3d-models/spoon-fork-knife-cutlery-set-3d-model-1866402" target="_blank" rel="noopener noreferrer">Spoon Fork Knife Cutlery Set 3D model</a> by jondetski
               </li>
             </ul>
+            <p>
+              <a href="https://ncase.me/nutshell/#WhatIsNutshell">:Nutshell by Nicky Case</a>
+            </p>
           </div>
+          <h4>
+            :x More info on Malaysia and Singapore LGBTQ+ policies
+          </h4>
+          <p>
+            <b>✨ For more information on Malaysia and Singapore’s policies regarding the LGBTQ+ community</b>, refer to <a href="#PenalCodeSection377">:the Penal Code Section 377</a> as a head start. I’d also recommend reading about laws concerning <a href="#Censorship">:censorship</a>, <a href="#FakeNews">:“fake news”</a> and <a href="#ForeignInterference">:“foreign interference”</a> in these countries, too. As queerness is often erroneously framed as a Western import in these countries, many have reason to fear that these media laws might be misused to restrict their freedom of (queer) expression.
+          </p>
+          <h4>:x Foreign Interference</h4>
+          <p>Here's some articles about <a href="https://en.wikipedia.org/wiki/Foreign_Interference_(Countermeasures)_Act_2021">:FICA in Singapore:</a></p>
+          <ul>
+          	<li><a href="https://www.straitstimes.com/singapore/measures-in-spores-foreign-interference-law-to-counter-hostile-information-campaigns-take-effect-from-july-7" target="_blank" rel="noopener noreferrer">THE STRAITS TIMES: Measures in S'pore's foreign interference law to counter hostile information campaigns take effect from July 7.</a></li>
+          	<li><a href="https://www.aljazeera.com/news/2021/10/13/singapore-media-face-hard-choices-after-new-law-passed" target="_blank" rel="noopener noreferrer">ALJAZEERA: 'Hard choices' for Singapore media after controversial law passed.</a></li>
+          	<li><a href="https://www.change.org/p/government-of-the-republic-of-singapore-say-no-to-unfettered-power-rethink-fica?utm_source=share_petition&utm_medium=custom_url&recruited_by_id=8a17fa90-1bc4-11ec-b8d7-2300f85d1faf" target="_blank" rel="noopener noreferrer">CHANGE.ORG: #WhatTheFica petition.</a></li>
+          </ul>
+
+          <h4>:x PenalCodeSection377</h4>
+          <p>Whereas Britain has started recognising same sex marriage since 2014, its former colonies such as Malaysia and Singapore have continued to uphold <a href="https://en.wikipedia.org/wiki/Section_377">:the British colonial penal code Section 377</a>, even long after their respective national independences. Singapore's ruling government only <a href="https://www.todayonline.com/singapore/ndr-2022-section-377a-repeal-constitution-1974206" target="_blank" rel="noopener noreferrer">very recently announced</a> its decision to repeal Section 377A on August 21, 2022 during their Prime Minister's National Day Rally speech. However, this was followed by <a href="https://www.bloomberg.com/news/articles/2022-08-22/singapore-keeps-lgbt-content-curbs-despite-men-sex-law-repeal" target="_blank" rel="noopener noreferrer">their insistence on upholding LGBTQ+ content restrictions</a> in local media, as well as its decision to uphold heterosexual definitions of marriage and families in <a href="https://www.wethecitizens.net/more-section-377a-reactions-and-workplace-deaths/#framing-the-repeal-of-section-377a" target="_blank" rel="noopener noreferrer">upcoming constitutional amendments</a>.)</p>
+          <p>To learn more about other policies that endanger LGBTQ+ lives in Malaysia and Singapore, please refer to the following articles:</p>
+          <ul>
+          	<li>QUEER LAPIS: LGBTQ Legal Guide: <a href="https://www.queerlapis.com/legal-resource-laws-part-1-laws/" target="_blank" rel="noopener noreferrer">Part 1</a> and <a href="https://www.queerlapis.com/lgbtq-legal-guide-part-2-constitution/" target="_blank" rel="noopener noreferrer">Part 2</a> (Malaysia)</li>
+          	<li><a href="https://heckinunicorn.com/blogs/heckin-unicorn-blog/the-price-of-being-queer-in-singapore-lgbt-rights-in-singapore?currency=USD" target="_blank" rel="noopener noreferrer">HECKIN UNICORN: Here are all the anti-LGBTQ regulations in Singapore // LGBT Rights in Singapore</a> (Singapore)</li>
+          </ul>
+
+          <h4>:x Censorship</h4>
+          <p>This Medium article titled <a href="https://medium.com/@pelangicampaign/internet-and-sexuality-lgbtq-experience-in-malaysia-a895497f3a35" target="_blank" rel="noopener noreferrer">"Internet and Sexuality: LGBTQ Experience in Malaysia" by PELANGI Campaign</a> gives a good overview of the media laws governing the nation's freedom of speech, as well as a study of queer Malaysians' experience navigating online spaces.</p>
+
+          <p>As for Singapore-related news, <a href="https://heckinunicorn.com/blogs/heckin-unicorn-blog/the-price-of-being-queer-in-singapore-lgbt-rights-in-singapore?currency=USD" target="_blank" rel="noopener noreferrer">"Here are all the anti-LGBTQ regulations in Singapore // LGBT Rights in Singapore" posted by Heckin' Unicorn</a> includes <a href="https://heckinunicorn.com/blogs/heckin-unicorn-blog/the-price-of-being-queer-in-singapore-lgbt-rights-in-singapore?currency=USD#media" target="_blank" rel="noopener noreferrer">a section</a> about media restrictions about LGBTQ+ protrayals in Singapore. The rest of the article also talks about other laws that curtail freedoms and material rights of LGBTQ+ peoples in Singapore, so highly recommend reading those, too!</p>
+
+          <p>If you're wondering whether Singapore's repeal of 377A has any further implications regarding LGBTQ+ media policies, that is unfortunately not the case at this point in time. (Read: <a href="https://www.bloomberg.com/news/articles/2022-08-22/singapore-keeps-lgbt-content-curbs-despite-men-sex-law-repeal" target="_blank" rel="noopener noreferrer">BLOOMBERG: Singapore Keeps LGBTQ Content Curbs Despite Gay-Sex Ban Repeal</a>).</p>
+
+          <h4>:x Fake News</h4>
+
+          <p>Here's some articles about the Emergency (No. 2) Ordinance 2021 (dubbed the 'Fake News Ordinance') in Malaysia, which lasted from March 12, 2021 - October 21, 2021:</p>
+          <ul>
+          	<li><a href="https://web.archive.org/web/20210312003332/https://www.thestar.com.my/news/nation/2021/03/11/jail-rm100000-fine-for-those-who-spread-fake-news-on-covid-19-emergency-from-friday-march-12" target="_blank" rel="noopener noreferrer">THE STAR: Jail, RM100,000 fine for those who spread fake news on Covid-19, Emergency from Friday (March 12).</a></li>
+          	<li><a href="https://www.article19.org/resources/malaysia-fake-news-ordinance-severe-ramifications-freedom-expression/" target="_blank" rel="noopener noreferrer">ARTICLE 19: Malaysia: Emergency Fake News Ordinance has severe ramifications for freedom of expression.</a></li>
+          </ul>
+
+          <p>... and some more articles about <a href="https://en.wikipedia.org/wiki/Protection_from_Online_Falsehoods_and_Manipulation_Act_2019" target="_blank" rel="noopener noreferrer">:POFMA in Singapore:</a></p>
+          <ul>
+          	<li><a href="https://www.aljazeera.com/news/2019/5/9/singapore-passes-new-law-to-police-fake-news-despite-concerns" target="_blank" rel="noopener noreferrer">ALJAZEERA: Singapore passes new law to police fake news despite concerns</a></li>
+          </ul>
+
+          <h4>:x Queer History</h4>
+
+          <p>While there is limited scholarly documentation of queerness in pre-colonial Malaysian and Singaporean history, evidence of trans / non-binary genders and same-sex partnerships in traditional and indigenous Asian societies suggests that queerness is not a recent development in these countries, nor is it an import from the West (not exclusively, at least.) What <em>is</em> a recent development and an import from the West, though, is the introduction of laws which systematically discriminate against (if not prosecute) queer peoples, one of the most significant turning point being the enactment of <a href="#PenalCodeSection377">:the colonial British Penal Code</a> in the 20th century.</p>
+
+          <p>Below are some resources to learn more about queer histories in Malaysia and Singapore, some of which include timelines of when/how anti-LGBTQ+ infrastructures became established in these regions:</p>
+
+          <ul>
+          <li>
+          <a href="https://www.youtube.com/watch?v=AaOE8qN3Xu0">:Adam Tambakau's video essay "LGBTQ+ History in Asia"</a> provides a great overview of queer history in Malaysia and Singapore (among other Asian countries), as well as the colonial origins of Penal Code 377A.
+          </li>
+          <li>
+          In <a href="https://www.womenunbounded.com/post/unravelling-queer-singapore-bugis-street" target="_blank" rel="noopener noreferrer">"Unravelling Queer Singapore: Bugis Street"</a>, Gaiatri Sasitharan documents the oft-undermined history of Bugis Street as a queer-positive safe space for the LGBTQ+ community, and how national institutions eventually bulldozed these queer spaces (along with their histories) in favour of modern capitalism, urban development and conservative cis-heteronormative agendas.
+          </li>
+          <li>
+          <a href="https://www.instagram.com/p/CFzNwOAhmpd/" target="_blank" rel="noopener noreferrer">"Queer Visibility In Islamic History"</a> is a short photo essay by Quasa, a peer support and community network for queer Muslims in Singapore.
+          </li>
+          <li>
+          In <a href="https://youtu.be/BJ3z-hdeIF4?t=656">:this section of "The Power of Quasa"</a>, an podcast interview hosted by New Naratif, two founders of Quasa discuss what it means to reconcile both queer and Muslim identities, addressing topics such as: how queerness is understood and expressed in Islamic history; how religious authorities have weaponised religion and politics against queer Muslim minorities, and; the distinctive experience(s) of navigating queer Muslim identities in the context of Singapore. There is also a <a href="https://newnaratif.com/the-power-of-quasa/" target="_blank" rel="noopener noreferrer">full transcript</a> of this interview on the New Naratif website.
+          </li>
+          <li>
+          <a href="https://www.queerlapis.com/comparison-of-syariah-laws-that-criminalise-same-sex-relations-by-state/" target="_blank" rel="noopener noreferrer">QUEER LAPIS: Comparison of Syariah Laws that Criminalise Same-sex Relations by State</a>. Note the year(s) in which these laws were implemented.
+          </li>
+          <li>
+          Here is <a href="https://twitter.com/wilde_dorian/status/976559379615948800" target="_blank" rel="noopener noreferrer">a Twitter thread</a> authored by Dorian Wilde, a trans and sexual minority rights activist and founder of Transmen of Malaysia, which compiles a series of literature excerpts and artefacts containing evidence of trans/androgyny and bi/homosexuality being associated with spiritual divinity, royal entertainment and commonplace sexual cultures in Malaysia up to the late 20th century.
+          </li>
+          </ul>
+
+          <h4>:x Different Understandings of Queer Fandoms</h4>
+            <p>
+              💡 Some participants shared that they saw queer fandoms as a way to “correct” or “hack” inaccurate / negative / violent depictions of queer people in mainstream media, while others are more inclined to view fandoms as an alternative outlet for “reimagination” which provides its own form of agency.
+            </p>
         </section>
         <section class="offset " id="submit">
           <div class="box">
@@ -515,10 +602,10 @@
           <div class="box">
           <h2>How it works</h2>
             <ol>
-              <li>Open the painting tool. (Hint: Top of <a href="#home">Home Page</a>.)</li>
+              <li><b>Open the painting tool</b>. (Hint: Top of <a href="#home">Home Page</a>.)</li>
               <li>Select a <b>base template.</b></li>
               <li>Play with <b>brushes</b> of various shapes and sizes - let your imagination run wild!</li>
-              <li>Save your masterpiece - or share it with the world! Feel free to <a href="#submit">share your creations with me</a>, and I’ll put it up on the <a href="#gallery">virtual fridge door</a>. ^_^ </li>
+              <li><b>Save your masterpiece!</b> 🐈 <br/>Feel free to <a href="#submit">share your creations with me</a>, and I’ll put it up on the <a href="#gallery">virtual fridge door</a>. ^_^ </li>
             </ol>
             <div class="box callout">
               <h4>
