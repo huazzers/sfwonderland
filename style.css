@@ -18,10 +18,9 @@ canvas {
   display: block;
 }
 
-/* Split the screen in half */
-.split {
+.split{
   height: 100%;
-  width: 50%;
+  width:100%;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -35,11 +34,38 @@ canvas {
   background-size: cover;
 }
 
-/* Control the left side */
-.left {
-  left: 0;
-  cursor: none;
+.left{
+  display:none;
 }
+.right{
+  overflow-y: scroll;
+  cursor: default;
+  /*border: 5px solid red;*/
+}
+
+/* Medium devices*/
+@media only screen and (min-width: 992px) {
+  /* Split the screen in half */
+  .split {
+    /*height: 100%;*/
+    width: 50%;
+  }
+
+  /* Control the left side */
+  .left {
+    left: 0;
+    cursor: none;
+    display:block;
+  }
+
+  /* Control the right side */
+  .right {
+    right: 0;
+  }
+
+}
+
+
 .left-logo{
   display: flex;
   justify-content: center;
@@ -93,13 +119,7 @@ main{
   padding: 0;
 }
 
-/* Control the right side */
-.right {
-  right: 0;
-  overflow-y: scroll;
-  cursor: default;
-  /*border: 5px solid red;*/
-}
+
 
 nav{
   position:sticky;
@@ -290,6 +310,23 @@ ul.nav-list li{
   background-color:white;
   font-family:'OCRAEXT', serif;
   font-size:1em;
+}
+
+
+blockquote:before {
+  color: #b4b3b3;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.15em;
+  vertical-align: -0.25em;
+}
+blockquote p {
+  display: inline;
+}
+
+figcaption{
+  margin-top:1em;
 }
 
 footer{
