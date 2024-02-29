@@ -430,6 +430,10 @@
             <h2>
               Submit
             </h2>
+            <div class="box callout">
+              <h4>⚠️ Note</h4>
+              <p><i>As of February 28, 2024, this form is no longer accepting submissions. This is because GetForm (which this form uses) is ending the monthly renewal of submission limits for their free plan, and I've been receiving more spam content than actual art submissions from this portal. Thank you for participating, and apologies for having to shutdown submissions at this time. </i></p>
+            </div>
             <p>
               Feel free to share your creations with me, and I’ll put it up on the <a href="#gallery">virtual fridge door</a>. ^_^
             </p>
@@ -438,7 +442,7 @@
               <div class = "submission-form-group">
                 <label for= "fileselect">Upload (one file at a time!):</label>
                 <div class = "submission-input-group">
-                  <input type="file" name="upload" accept=".jpg, .jpeg .png" id="fileselect" onchange="checkFileUploadExt(this);" required>
+                  <input type="file" name="upload" accept=".jpg, .jpeg .png" id="fileselect" onchange="checkFileUploadExt(this);" required disabled>
                   <script>
                   //attaching "change" event to the file upload button
                   document.getElementById("fileselect").addEventListener("change", validateFile)
@@ -475,18 +479,18 @@
               <div class = "submission-form-group">
                 <label for= "email">Your email address:</label>
                 <div class = "submission-input-group">
-                  <input type="email" name="email" id="email" required>
+                  <input type="email" name="email" id="email" required disabled>
                 </div>
               </div>
               <div class = "submission-form-group">
                 <label for= "message">Message (optional):</label>
                 <div class = "submission-input-group">
-                  <textarea onkeydown="remainingChars(800, this)" type="message" name="message" id="message" rows="10" cols="75" maxlength="800"></textarea>
+                  <textarea onkeydown="remainingChars(800, this)" type="message" name="message" id="message" rows="10" cols="75" maxlength="800" disabled></textarea>
                   <div style="margin-left: auto; margin-right: 0;"><span id="remainingChars"> </span></div>
                 </div>
               </div>
               <div class = "submission-form-group">
-                <button type="submit" id="submission-button">Submit</button>
+                <button type="submit" id="submission-button" disabled>Submit</button>
               </div>
             </form>
 
